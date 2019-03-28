@@ -2,35 +2,56 @@
 
 class Calc{
 
-private $a;
-private $b;
+    private $num1;
+    private $num2;
+    private $mem;
 
- function __construct($a, $b)
- {
-    $this->a= $a;
-    $this->b = $b;
- }
+     function __construct()
+     {
 
-function add(){
-  echo "Summation = ". ($this->a+$this->b)."<br>";
- }
+     }
 
- function sub(){
-  echo "Subtraction = ".($this->a-$this->b)."<br>";
- }
+     public function __setNum1($num1){
+         // TODO: Implement __set() method.
+         $this->num1=$num1;
+     }
 
- function mul(){
-  echo "Multiplication = ".($this->a*$this->b)."<br>";
- }
+    public function __setNum2($num2){
+        // TODO: Implement __set() method.
+        $this->num2=$num2;
+    }
 
- function div(){
-  echo "Division = ".($this->a/$this->b)."<br>";
- }
+     public function addition(){
+         return $this->num1+$this->num2;
+     }
 
- function sqr(){
- echo "SQRT = ".sqrt($this->a);
- }
+     public function subtraction(){
+         return $this->num1-$this->num2;
+     }
 
+     public function multiplication(){
+         return $this->num1*$this->num2;
+     }
 
+     public function division(){
+         if($this->num2==0){
+             return ERRORDIV;
+         }else{
+             return $this->num1/$this->num2;
+         }
+     }
+
+     public function squareRoot(){
+         return sqrt($this->num1);
+     }
+
+     public function power(){
+         return pow($this->num1, $this->num2);
+     }
+
+     public function clear(){
+         $this->num1=NULL;
+         $this->num2=NULL;
+     }
 }
 

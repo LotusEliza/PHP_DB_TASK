@@ -2,13 +2,18 @@
 
 include("libs/Calc.php");
 
-$first = new Calc(3, 3);
+$first = new Calc();
 
-$result = $first-> add();
-$result1 = $first -> sub();
-$result2 = $first -> mul();
-$result3 = $first -> div();
-$result4 = $first -> sqr();
+$first->__setNum1(4);
+$first->__setNum2(3);
+
+$result = $first-> addition();
+$result1 = $first -> subtraction();
+$result2 = $first -> multiplication();
+$result3 = $first -> division();
+$result4 = $first -> squareRoot();
+$result5 = $first -> power();
+
 
 
 include("templates/index.php");
