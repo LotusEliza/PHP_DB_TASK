@@ -8,12 +8,20 @@
 <body>
 
 <div>
+    <h3>Print by line:</h3>
+    <p>
+        <?php
+        foreach ($array as $item){
+            echo $item;
+        }
+        ?>
+    </p>
     <hr>
     <h3>Find line:</h3>
-    <p><?php echo $result1; ?></p>
+    <p><?php echo $result2; ?></p>
     <hr>
     <h3>Find symbol:</h3>
-    <p><?php echo $result2; ?></p>
+    <p><?php echo $result1; ?></p>
     <hr>
     <h3>Change Line:</h3>
     <p>

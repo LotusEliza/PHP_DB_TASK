@@ -3,44 +3,63 @@
     function upload_file()
     {
         if (isset($_POST["submit"])){
-            $target_dir = "files/";
-            $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
+            if(check_perm()){
+                $target_file = DIR . basename($_FILES["fileToUpload"]["name"]);
 
-            if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)){
-                return UPLOAD_OK;
-            }else {
-                return ERROR_UPLOAD;
+                if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)){
+                    return UPLOAD_OK;
+                }else {
+                    return ERROR_UPLOAD;
+                }
+            }else{
+                return ERROR_PERM;
             }
         }
     }
 
+    function check_perm(){
+        $permission=substr(sprintf("%o",fileperms(DIR)),-4);
+        if ($permission=="0777"){
+           return true;
+        }else{
+            return false;
+        }
+    }
 
     function info_file()
     {
-        $fileList = glob('files/*');
-        $files = array();
-        $n = 1;
+        if(check_perm()){
+            $fileList = glob('files/*');
+            $files = array();
+            $n = 1;
 
-        foreach ($fileList as $filename){
-            $shortname = basename($filename);
-            $size = format_size_units(filesize($filename));
-            $files[] = array("id" => $n++, "name" => $shortname, "size" => $size);
+            foreach ($fileList as $filename){
+                $shortname = basename($filename);
+                $size = format_size_units(filesize($filename));
+                $files[] = array("id" => $n++, "name" => $shortname, "size" => $size);
+            }
+            return $files;
+        }else{
+            return ERROR_PERM;
         }
-        return $files;
     }
 
 
     function remove($filename)
     {
-        $filesList = glob('files/*');
-
-        foreach($filesList as $file){
-            $shortname = basename($file);
-            if($shortname == $filename){
-                unlink($file);
-                return REMOVE_OK;
+        if(check_perm()) {
+            $filesList = glob('files/*');
+            foreach($filesList as $file){
+                $shortname = basename($file);
+                if($shortname == $filename){
+                    unlink($file);
+                    return REMOVE_OK;
+                }
             }
+        }else{
+            return ERROR_PERM;
         }
+
     }
 
 

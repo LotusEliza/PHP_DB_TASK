@@ -3,19 +3,12 @@
 include 'config.php';
 include 'FileRead.php';
 
-
-$findline= new FileRead(1,1);
-
-$result1=$findline->find_line();
-$result2=$findline->find_symbol();
-
-echo "<hr>";
-$findline->printbyline();
-echo "<hr>";
-$findline->printbysymbol();
-
-$array1=$findline->setLine(0,"TEST LINE");
-$array2=$findline->set_symbol(2,3, "7");
-
+$find= new FileRead();
+$result1 = $find->find_symbol(3);
+$result2 = $find->find_line(3);
+$find->print_by_symbol();
+$array = $find->print_by_line();
+$array1 = $find->set_line(0,"TEST LINE");
+$array2=$find->set_symbol(1,1, "9");
 
 include 'templates/index.php';

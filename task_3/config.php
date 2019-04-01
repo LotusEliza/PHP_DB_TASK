@@ -6,4 +6,5 @@
  * Time: 11:39 AM
  */
 define("FILE", "file.txt");
+define("FILE2", "wfile.txt");
 
