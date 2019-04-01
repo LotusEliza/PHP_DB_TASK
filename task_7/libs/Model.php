@@ -2,34 +2,50 @@
 
 class Model
 { 
-   public function __construct()
-   {
+    protected $my_array; 
 
-   }
-   	
-	public function getArray()
-   {	    
-		return array('%TITLE%'=>'Contact Form', '%ERRORS%'=>'Empty field', '%NAME%' => $_POST["firstname"], '%ERROR%'=>'');
-   }
-	
-	public function checkForm()
-	{
-        if (empty($_POST["firstname"])) {
-            $array=$this->getArray();
-            $array['%ERROR%']=ERROR_NAME;
-            $nameErr='%ERROR_NAME%';
-//            $nameErr = "Missing name";
-        }
-        else {
-            $firstname = $_POST["firstname"];
-        }
 
-        if (empty($_POST["email"])) {
-            $addrErr = "Missing";
-        }
-        else {
-            $address = $_POST["email"];
-        }
+    public function __construct()
+    {
+     $this->array=['%TITLE%'=>'Contact Form',
+                 '%ERRORS%'=>'Empty field',
+                 '%NAME%' => 'name',
+                 '%ERROR_NAME%'=>'',
+                 '%FIRSTNAME%'=>''];
+    }
+        
+     public function getArray()
+    {	 
+        return  $this->array;  
+         // return array('%TITLE%'=>'Contact Form', '%ERRORS%'=>'Empty field', '%NAME%' => $_POST["firstname"], '%ERROR%'=>'');
+    }
+     
+     public function checkForm()
+     {
+         if (empty($_POST["firstname"])) {
+             $array=$this->getArray();
+             $this->array['%ERROR_NAME%']="no name";
+         }
+         else {
+             $firstname = $_POST["firstname"];
+             $this->array['%FIRSTNAME%']=$_POST["firstname"];
+         }
+ 
+         if (empty($_POST["email"])) {
+             $array=$this->getArray();
+             $this->array['%ERROR%']="no name";
+         }
+         else {
+             $firstname = $_POST["firstname"];
+             $this->array['%FIRSTNAME%']=$_POST["firstname"];
+         }
+ 
+         if (empty($_POST["email"])) {
+             $addrErr = "Missing";
+         }
+         else {
+             $address = $_POST["email"];
+         }
 
 
 //        if (!isset($_POST["howMany"])) {
