@@ -27,7 +27,12 @@ $first_mus = new Musician();
 $first_mus->addInstrument($guitar);
 $first_mus->assingToBand($band);
 
+$second_mus = new Musician();
+$second_mus->addInstrument($piano);
+$second_mus->assingToBand($band);
 
+$band->addMusician($first_mus);
+$band->addMusician($second_mus);
 
 
 include 'templates/index.php';

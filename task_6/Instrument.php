@@ -24,10 +24,10 @@ class Instrument implements iInstrument
     }
 
     public function getName(){
-
+        return $this->name;
     }
 
     public function getCategory(){
-
+        return $this->category;
     }
 }

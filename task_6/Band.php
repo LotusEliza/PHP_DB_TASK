@@ -11,7 +11,7 @@ class Band implements iBand
 {
     protected $name;
     protected $genre;
-    protected $musicians;
+    protected $musicians=[];
 
     public function getName(){
 
@@ -23,6 +23,9 @@ class Band implements iBand
 
     public function addMusician(iMusician $obj){
 
+        $this->musicians[] = $obj;
+//        array_push($this->musicians[], "$obj");
+        var_dump($this->musicians);
     }
 
     public function getMusician(){

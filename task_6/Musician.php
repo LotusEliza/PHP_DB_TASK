@@ -12,8 +12,11 @@ class Musician implements iMusician
     protected $instrument;
     protected $musician_type;
 
+
     public function addInstrument(iInstrument $obj){
         $this->instrument = $obj->getName();
+        $this->musician_type = $obj->getCategory();
+//        var_dump($this->instrument);
     }
 
     public function getInstrument(){
@@ -26,7 +29,7 @@ class Musician implements iMusician
     }
 
     public function getMusicianType(){
-
+        return $this->musician_type;
     }
 
 }
