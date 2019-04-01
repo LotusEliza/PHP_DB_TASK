@@ -12,3 +12,5 @@ catch(Exception $e)
 {
   echo $e->getMessage();	           
 }
+
+include ('templates/index.php');

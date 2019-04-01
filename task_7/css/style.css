@@ -30,6 +30,9 @@ input[type=submit]:hover {
   border-radius: 5px;
   background-color: #f2f2f2;
   padding: 20px;
+  width: 500px;
+    margin-right: auto;
+    margin-left: auto;
 }
 
 select:required:invalid {
@@ -41,3 +44,4 @@ option[value=""][disabled] {
 option {
   color: black;
 }
+

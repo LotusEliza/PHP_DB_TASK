@@ -1,21 +1,22 @@
 <html>
 <head>
 	<title>%TITLE%</title>
-    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
 </head>
 <body>
 <div><h2>Contact Form</h2></div>
-<div style="color: #FF0000; font-size: 15px;"><strong>%ERROR%</strong></div>
+<div style="color: #FF0000; font-size: 15px;"><strong>%ERRORS%</strong></div>
 
-
-
-<!-- <h3>Contact Form</h3>
+<!--value="--><?php //echo $firstname;?><!--"-->
+ <h3>Contact Form</h3>
 
     <div class="container">
     <form method="POST" action="">
         <label for="firstname">First Name</label>
-        <input type="text" id="firstname" name="firstname" placeholder="Your name..">
-
+        <input type="text" id="firstname" name="firstname"  placeholder='%NAME%'>
+        <span class="error">%ERROR_NAME%</span>
+        <br>
+        <br>
         <label for="email">Email</label>
         <input type="text" id="email" name="email" placeholder="Your email..">
 
@@ -32,7 +33,7 @@
 
         <input type="submit" value="Submit">
     </form>
-    </div> -->
+    </div>
 
 </body>
 </html>

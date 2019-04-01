@@ -1,11 +1,9 @@
-
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 <meta charset="utf-8">
 <title>Calculator</title>
-
+</head>
 <body>
     <div>
         <h3> Number1 = <?php echo $num1; ?></h3>
@@ -19,14 +17,12 @@
         <p>power: <?php echo $result5; ?></p>
         <p>add to memory: <?php echo $result6; ?></p>
         <p>add to memory: <?php echo $result7; ?></p>
-        <p>memory get2: <?php echo $result8; ?></p>
+        <p>memory get: <?php echo $result8; ?></p>
         <p>memory substr: <?php echo $result9; ?></p>
-        <p>memory get2: <?php echo $result10; ?></p>
+        <p>memory get: <?php echo $result10; ?></p>
         <p>memory clear: <?php echo $result11; ?></p>
-        <p>memory get2: <?php echo $result12; ?></p>
+        <p>memory get: <?php echo $result12; ?></p>
         <hr>
     </div>
-
-
 </body>
 </html>

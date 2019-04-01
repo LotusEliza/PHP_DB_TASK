@@ -8,17 +8,23 @@ class Calc{
 
      function __construct()
      {
-
+         $this->num1=NULL;
+         $this->num2=NULL;
+         $this->memory=NULL;
      }
 
      public function __setNum1($num1){
          // TODO: Implement __set() method.
-         $this->num1=$num1;
+         if (is_numeric($num1)) {
+             $this->num1=(int)$num1;
+         }
      }
 
     public function __setNum2($num2){
         // TODO: Implement __set() method.
-        $this->num2=$num2;
+        if (is_numeric($num2)) {
+            $this->num2=(int)$num2;
+        }
     }
 
     public function __getNum1(){
@@ -70,28 +76,17 @@ class Calc{
      }
 
      public function memoryAdd(){
-    //       if($this->num1 != MY_NAN){
          $this->memory+=$this->num1;
          return true;
-    //        } else {
-    //            return MY_NAN;
-    //        }
      }
      public function memorySubstruct(){
-    //        if($this->firstVar != MY_NAN){
          $this->memory-=$this->num1;
          return true;
-    //        } else {
-    //            return MY_NAN;
-    //        }
      }
 
      public function memoryClear(){
          $this->memory = NULL;
          return true;
      }
-
-
-
 }
 

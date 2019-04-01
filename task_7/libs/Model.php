@@ -9,29 +9,68 @@ class Model
    	
 	public function getArray()
    {	    
-		return array('%TITLE%'=>'Contact Form', '%ERRORS%'=>'Empty field');	
+		return array('%TITLE%'=>'Contact Form', '%ERRORS%'=>'Empty field', '%NAME%' => $_POST["firstname"], '%ERROR%'=>'');
    }
 	
 	public function checkForm()
 	{
+        if (empty($_POST["firstname"])) {
+            $array=$this->getArray();
+            $array['%ERROR%']=ERROR_NAME;
+            $nameErr='%ERROR_NAME%';
+//            $nameErr = "Missing name";
+        }
+        else {
+            $firstname = $_POST["firstname"];
+        }
+
+        if (empty($_POST["email"])) {
+            $addrErr = "Missing";
+        }
+        else {
+            $address = $_POST["email"];
+        }
+
+
+//        if (!isset($_POST["howMany"])) {
+//            $howManyErr = "You must select 1 option";
+//        }
+//        else {
+//            $howMany = $_POST["howMany"];
+//        }
+
+        if (empty($_POST["comment"])) {
+            $favFruitErr = "You must select 1 or more";
+        }
+        else {
+            $favFruit = $_POST["comment"];
+        }
+
+
+
+
+
         // if(isset($_POST['firstname']) && isset($_POST['email'])
         // && isset($_POST['subject']) && isset($_POST['comment'])){
 
         // }
 
-        $emp_name=trim($_POST["firstname"]);
-        $emp_number=trim($_POST["email"]);
-        $emp_subject=trim($_POST["subject"]);
-        $emp_email=trim($_POST["comment"]);
-
-        if($firstname =="") {
-            $errorMsg=  "error : You did not enter a name.";
-            $code= "1" ;
-        }
-        elseif($email == "") {
-            $errorMsg=  "error : Please enter number.";
-            $code= "2";
-        }
+        /////////////////////////////////////////////////////
+//        $emp_name=trim($_POST["firstname"]);
+//        $emp_email=trim($_POST["email"]);
+//        $emp_subject=trim($_POST["subject"]);
+//        $emp_comment=trim($_POST["comment"]);
+//
+//        if($emp_name =="") {
+//            $errorMsg=  "error : You did not enter a name.";
+//            echo $errorMsg;
+////            $code= "1" ;
+//        }elseif($emp_email == "") {
+//            $errorMsg=  "error : You didn't enter your email.";
+////            $code= "2";
+//            echo $errorMsg;
+//        }
+        ////////////////////////////////////////////////
         //check if the number field is numeric
         // elseif(is_numeric(trim($emp_number)) == false){
         //     $errorMsg=  "error : Please enter numeric value.";
@@ -50,11 +89,13 @@ class Model
         // $errorMsg= 'error : You did not enter a valid email.';
         // $code= "3";
         // }
-        else{
-            
-        echo "Success";
-        //final code will execute here.
-        }
+        ////////////////////////////////////////////////
+//        else{
+//
+//        echo "Success";
+//        //final code will execute here.
+//        }
+        /////////////////////////////////////////////
 
 		return true;			
 	}
@@ -74,9 +115,6 @@ class Model
                     <body>
                         <p>First Name:.$firstname.<br></p>
                         <p>Address:.$email.<br></p>
-                        <p>Quantity:.$quantity.<br></p>
-                        <p>Book ID:.$subject.<br></p>
-                        <p>Book Name:.$comment.<br></p>
         </body>
         </html>";
             $headers  ="From:".$firstname."<".$email.">\r\n";
