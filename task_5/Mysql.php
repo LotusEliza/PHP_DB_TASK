@@ -10,7 +10,6 @@ class Mysql implements iWorkData
 {
     protected $val;
 
-
     function connect()
     {
         $db = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
@@ -19,19 +18,18 @@ class Mysql implements iWorkData
 
     public function saveData($key, $val){
         $this->val = $val;
-
         $db=$this->connect();
         $query = "INSERT INTO try ($key) VALUES (?)";
         $stmt = $db->prepare($query);
         $stmt->bind_param("s", $val);
         $result = $stmt->execute();
-        if ($result === TRUE) {
-            echo "New item successfully saved";
-        } else {
-            echo "Error: " . $result . "<br>" . $db->error;
-        }
         $db->close();
-        return true;
+
+        if ($result === TRUE) {
+            return ITEM_INS;
+        } else {
+            return ERROR_INS;
+        }
     }
 
     public function getData($key){
@@ -57,7 +55,11 @@ class Mysql implements iWorkData
         $query = "DELETE FROM try WHERE $key='$this->val'";
         $result = $db->query($query);
         $db->close();
-        echo "deleted";
-        return $result;
+
+        if ($result === TRUE) {
+            return ITEM_REM;
+        } else {
+            return ERROR_REM;
+        }
     }
 }

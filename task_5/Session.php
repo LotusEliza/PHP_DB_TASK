@@ -3,16 +3,16 @@ include 'iWorkData.php';
 class Session implements iWorkData{
 
     public function saveData($key, $val){
-        if(isset($_SESSION[$key]) && !empty($_SESSION[$key])) {
-            return SES_EXIST;
-        }else{
+//        if(isset($_SESSION[$key]) && !empty($_SESSION[$key])) {
+//            return SES_EXIST;
+//        }else{
             $_SESSION[$key] = $val;
             return SES_SET . $_SESSION[$key];
-        }
+//        }
     }
 
     public function getData($key){
-        return "Get session: " . $_SESSION['4'];
+        return "Get session: " . $_SESSION[$key];
     }
 
     public function deleteData($key){

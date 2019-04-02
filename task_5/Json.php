@@ -14,7 +14,7 @@ class Json implements iWorkData
         $myArr = array($key=>$val);
         $myJSON = json_encode($myArr);
         $this->json = $myJSON;
-        return JSON_SET;
+        return JSON_SET . $this->json ;
     }
 
     public function getData($key){
