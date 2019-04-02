@@ -13,7 +13,6 @@ class Ini implements iWorkData
     public function __construct()
     {
         $this->ini_array = parse_ini_file(INI_FILE);
-        var_dump( $this->ini_array);
     }
 
     public function saveData($key, $val){
@@ -22,7 +21,7 @@ class Ini implements iWorkData
     }
 
     public function getData($key){
-        return $this->ini_array[$key];
+        return GET_INI . $this->ini_array[$key];
     }
 
     public function deleteData($key){
@@ -62,11 +61,4 @@ class Ini implements iWorkData
         fclose($ffl);
     }
 
-
-
-    public function __destruct()
-    {
-        // TODO: Implement __destruct() method.
-
-    }
 }

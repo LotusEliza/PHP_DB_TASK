@@ -6,7 +6,6 @@
  * Time: 12:18 PM
  */
 
-
 class Cookie implements iWorkData
 {
     public function saveData($key, $val){

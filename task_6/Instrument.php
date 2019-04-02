@@ -14,12 +14,10 @@ class Instrument implements iInstrument
     protected $category;
 
     public function setName($name){
-
         $this->name = $name;
     }
 
     public function setCategory($category){
-
         $this->category = $category;
     }
 

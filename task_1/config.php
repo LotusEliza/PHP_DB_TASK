@@ -11,6 +11,6 @@ define("ERROR_EXIST", "Sorry, file already exists");
 define("UPLOAD_OK", "The file has been uploaded");
 define("REMOVE_OK", "The file has been removed");
 define("ERROR_REMOVE", "Problems removing file");
-define("ERROR_PERM", "Permission denied");
+define("ERROR_PERM", "Permission denied!");
 define("NO_FILES", "No files to show");
 define("DIR", "files/");

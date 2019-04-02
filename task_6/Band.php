@@ -13,23 +13,34 @@ class Band implements iBand
     protected $genre;
     protected $musicians=[];
 
-    public function getName(){
+    public function setName($name){
+        $this->name = $name;
+    }
 
+    public function setGenre($genre){
+        $this->genre = $genre;
+    }
+
+    public function getName(){
+        return $this->name;
     }
 
     public function getGenre(){
-
+        return $this->genre;
     }
 
     public function addMusician(iMusician $obj){
-
         $this->musicians[] = $obj;
-//        array_push($this->musicians[], "$obj");
-        var_dump($this->musicians);
+
+//        $instrument = $obj->getInstrument();
+//        $type = $obj->getMusicianType();
+//        $musician=array("instrument" => "$instrument", "musician_type" => "$type");
+//        var_dump($musician);
     }
 
     public function getMusician(){
-
+        $array = $this->musicians;
+        return $array;
     }
 
 }

@@ -18,8 +18,6 @@
 
 <h1>Json: </h1>
 <p><?php echo $json1; ?></p>
-
-
 <p>
     <?php
      foreach ($json2 as $item){
@@ -40,6 +38,10 @@
 </p>
 <p><?php echo $mysql3; ?></p>
 
+<h1>Ini: </h1>
+<p><?php echo $ini1; ?></p>
+<p><?php echo $ini2; ?></p>
+<p><?php echo $ini3; ?></p>
 
 
 

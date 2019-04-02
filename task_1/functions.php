@@ -40,7 +40,7 @@
             }
             return $files;
         }else{
-            return ERROR_PERM;
+            return NULL;
         }
     }
 

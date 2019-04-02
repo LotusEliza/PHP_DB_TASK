@@ -11,21 +11,19 @@ class Musician implements iMusician
 {
     protected $instrument;
     protected $musician_type;
-
+    protected $band_name;
 
     public function addInstrument(iInstrument $obj){
         $this->instrument = $obj->getName();
         $this->musician_type = $obj->getCategory();
-//        var_dump($this->instrument);
     }
 
     public function getInstrument(){
         return $this->instrument;
     }
 
-    public function assingToBand(iBand $nameBand){
-        $nameBand->addMusician($this);
-        var_dump($this);
+    public function assingToBand(iBand $band){
+        $this->band_name = $band->getName();
     }
 
     public function getMusicianType(){

@@ -29,4 +29,5 @@ class Json implements iWorkData
         $this->json = $myJSON;
         return JSON_DEL;
     }
+
 }
