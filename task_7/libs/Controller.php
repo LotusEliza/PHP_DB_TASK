@@ -27,7 +27,8 @@ class Controller
 			if($this->model->checkForm() === true)
 			{
 				$this->model->sendEmail();
-			}
+
+            }
 			$mArray = $this->model->getArray();	      ////////////////////////////	
 	        $this->view->addToReplace($mArray);	
 		}	
@@ -36,5 +37,11 @@ class Controller
 		{   
 		   $mArray = $this->model->getArray();		
 	       $this->view->addToReplace($mArray);			   
-		}				
+		}
+
+//        private function pageRefresh()
+//        {
+//            $mArray = $this->model->getArray();
+//            $this->view->addToReplace($mArray);
+//        }
 }

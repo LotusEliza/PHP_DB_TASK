@@ -9,21 +9,20 @@
 class Mysql implements iWorkData
 {
     protected $val;
+    protected $link;
 
-    function connect()
+    function __construct()
     {
-        $db = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
-        return $db;
+        $this->link = mysql_connect(DB_HOST, DB_USER, DB_PASS)
+        or die("Could not connect: " . mysql_error());
+        mysql_select_db(DB_NAME) or die(mysql_error());
     }
 
     public function saveData($key, $val){
         $this->val = $val;
-        $db=$this->connect();
-        $query = "INSERT INTO try ($key) VALUES (?)";
-        $stmt = $db->prepare($query);
-        $stmt->bind_param("s", $val);
-        $result = $stmt->execute();
-        $db->close();
+        $query = "INSERT INTO try ($key) VALUES (\"$val\")";
+        $result = mysql_query($query, $this->link);
+        mysql_free_result($result);
 
         if ($result === TRUE) {
             return ITEM_INS;
@@ -33,28 +32,26 @@ class Mysql implements iWorkData
     }
 
     public function getData($key){
-        $db=$this->connect();
         $query = "SELECT * FROM try WHERE $key='$this->val'";
-        $result = $db->query($query);
+        $result = mysql_query($query, $this->link);
 
-        $array_result=[];
-        if ($result->num_rows > 0) {
-            while($row = $result->fetch_assoc()) {
+        if (!$result){
+            return ERROR_MYSQL . mysql_error();
+
+        }else{
+            $array_result=[];
+            while ($row = mysql_fetch_assoc($result)) {
                 $array_result[] = array('id'=>$row["id"], 'name'=>$row["name"]);
             }
-        } else {
-            echo "0 results";
+            return $array_result;
         }
-
-        $db->close();
-        return $array_result;
     }
 
     public function deleteData($key){
-        $db=$this->connect();
         $query = "DELETE FROM try WHERE $key='$this->val'";
-        $result = $db->query($query);
-        $db->close();
+        $result = mysql_query($query, $this->link);
+
+        mysql_free_result($result);
 
         if ($result === TRUE) {
             return ITEM_REM;
@@ -62,5 +59,4 @@ class Mysql implements iWorkData
             return ERROR_REM;
         }
     }
-
 }

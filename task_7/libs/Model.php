@@ -2,138 +2,109 @@
 
 class Model
 { 
-    protected $my_array; 
-
+    protected $array;
+    protected $setval;
 
     public function __construct()
     {
      $this->array=['%TITLE%'=>'Contact Form',
                  '%ERRORS%'=>'Empty field',
-                 '%NAME%' => 'name',
                  '%ERROR_NAME%'=>'',
-                 '%FIRSTNAME%'=>''];
+                 '%ERROR_EMAIL%'=>'',
+                 '%ERROR_COMMENT%'=>'',
+                 '%NAME%' => '',
+                 '%EMAIL%' => '',
+                 '%COMMENT%' => '',
+                 '%SUBJECT1%' => '',
+                 '%SUBJECT2%' => '',
+                 '%SUBJECT3%' => '',
+                 '%ERROR_SUBJECT%' => ''];
     }
         
      public function getArray()
     {	 
-        return  $this->array;  
-         // return array('%TITLE%'=>'Contact Form', '%ERRORS%'=>'Empty field', '%NAME%' => $_POST["firstname"], '%ERROR%'=>'');
+        return  $this->array;
     }
-     
+
+    public function test_input($data) {
+        $data = trim($data);
+        $data = stripslashes($data);
+        $data = htmlspecialchars($data);
+        return $data;
+    }
+
      public function checkForm()
      {
-         if (empty($_POST["firstname"])) {
-             $array=$this->getArray();
-             $this->array['%ERROR_NAME%']="no name";
+
+        //----------------------------CHECK NAME------------------------------------
+         if (empty($_POST["name"])) {
+             $this->array['%ERROR_NAME%'] = "Name is required";
+         } else {
+             $name = $this->test_input($_POST["name"]);
+             if (!preg_match("/^[a-zA-Z ]*$/", $name)) {
+                 $this->array['%ERROR_NAME%'] = "Only letters and white space allowed";
+             } else {
+                 $this->array['%NAME%'] = $name;
+                 $this->setval+=1;
+             }
          }
-         else {
-             $firstname = $_POST["firstname"];
-             $this->array['%FIRSTNAME%']=$_POST["firstname"];
-         }
- 
+
+        //----------------------------CHECK EMAIL------------------------------------
          if (empty($_POST["email"])) {
-             $array=$this->getArray();
-             $this->array['%ERROR%']="no name";
-         }
-         else {
-             $firstname = $_POST["firstname"];
-             $this->array['%FIRSTNAME%']=$_POST["firstname"];
-         }
- 
-         if (empty($_POST["email"])) {
-             $addrErr = "Missing";
-         }
-         else {
-             $address = $_POST["email"];
+            $this->array['%ERROR_EMAIL%']="Email is required";
+         }else {
+            $email = $this->test_input($_POST["email"]);
+            if (!preg_match("/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,})$/i",$email)) {
+                $this->array['%ERROR_EMAIL%'] = "Invalid email format";
+            }else{
+                $this->array['%EMAIL%'] = $email;
+                $this->setval+=1;
+            }
          }
 
+         //----------------------------CHECK SUBJECT------------------------------------
+         if (empty($_POST["subject"])) {
+             $this->array['%ERROR_SUBJECT%']="Subject is required";
+         }else{
+             if($_POST["subject"]=="subject1"){
+                 $this->array['%SUBJECT1%']="selected = \"selected\"";
+                 $this->setval+=1;
+             }elseif ($_POST["subject"]=="subject2"){
+                 $this->array['%SUBJECT2%']="selected = \"selected\"";
+                 $this->setval+=1;
+             }elseif ($_POST["subject"]=="subject3"){
+                 $this->array['%SUBJECT3%']="selected = \"selected\"";
+                 $this->setval+=1;
+             }
+         }
 
-//        if (!isset($_POST["howMany"])) {
-//            $howManyErr = "You must select 1 option";
-//        }
-//        else {
-//            $howMany = $_POST["howMany"];
-//        }
-
+         //----------------------------CHECK COMMENT------------------------------------
         if (empty($_POST["comment"])) {
-            $favFruitErr = "You must select 1 or more";
+            $this->array['%ERROR_COMMENT%']="Comment is required";
+        } else {
+            $comment = $this->test_input($_POST["comment"]);
+            $this->array['%COMMENT%'] = $comment;
+            $this->setval+=1;
         }
-        else {
-            $favFruit = $_POST["comment"];
+
+        if($this->setval == 4){
+            return true;
+        }else{
+            return false;
         }
-
-
-
-
-
-        // if(isset($_POST['firstname']) && isset($_POST['email'])
-        // && isset($_POST['subject']) && isset($_POST['comment'])){
-
-        // }
-
-        /////////////////////////////////////////////////////
-//        $emp_name=trim($_POST["firstname"]);
-//        $emp_email=trim($_POST["email"]);
-//        $emp_subject=trim($_POST["subject"]);
-//        $emp_comment=trim($_POST["comment"]);
-//
-//        if($emp_name =="") {
-//            $errorMsg=  "error : You did not enter a name.";
-//            echo $errorMsg;
-////            $code= "1" ;
-//        }elseif($emp_email == "") {
-//            $errorMsg=  "error : You didn't enter your email.";
-////            $code= "2";
-//            echo $errorMsg;
-//        }
-        ////////////////////////////////////////////////
-        //check if the number field is numeric
-        // elseif(is_numeric(trim($emp_number)) == false){
-        //     $errorMsg=  "error : Please enter numeric value.";
-        //     $code= "2";
-        // }
-        // elseif(strlen($emp_number)<10){
-        //     $errorMsg=  "error : Number should be ten digits.";
-        //     $code= "2";
-        // }
-        // //check if email field is empty
-        // elseif($emp_email == ""){
-        //     $errorMsg=  "error : You did not enter a email.";
-        //     $code= "3";
-        // } //check for valid email 
-        // elseif(!preg_match("/^[_\.0-9a-zA-Z-]+@([0-9a-zA-Z][0-9a-zA-Z-]+\.)+[a-zA-Z]{2,6}$/i", $emp_email)){
-        // $errorMsg= 'error : You did not enter a valid email.';
-        // $code= "3";
-        // }
-        ////////////////////////////////////////////////
-//        else{
-//
-//        echo "Success";
-//        //final code will execute here.
-//        }
-        /////////////////////////////////////////////
-
-		return true;			
 	}
    
 	public function sendEmail()
 	{
-        if(isset($_POST['firstname']) && isset($_POST['email'])
-        && isset($_POST['subject']) && isset($_POST['comment'])){
-        $firstname=$_POST['firstname'];
+        $name=$_POST['name'];
         $email=$_POST['email'];
-        $subject=$_POST['subject'];
+        $subj=$_POST['subject'];
         $comment=$_POST['comment'];
         
         $to='lotuselizza@gmail.com';
-        $subject="New Order";
-        $body="<html>
-                    <body>
-                        <p>First Name:.$firstname.<br></p>
-                        <p>Address:.$email.<br></p>
-        </body>
-        </html>";
-            $headers  ="From:".$firstname."<".$email.">\r\n";
+        $subject=$subj;
+        $body="$name .$email . $subj . $comment";
+            $headers  ="From:".$name."<".$email.">\r\n";
             $headers .="reply-To:".$email."\r\n";
             $headers .="NINE-Version: 1.0\r\n";
             $headers .="Content-type: text/html; charset=utf-8";
@@ -146,13 +117,21 @@ class Model
             $send=mail($to, $subject, $body, $headers);
             $confirm=mail($user, $usersubject, $userheaders,$usermessage );
             if($send && $confirm){
-                
                 echo "Sucses";
+                $this->refresh();
             }
             else{
                 echo "Failed";
+                $this->refresh();
             }
         }
-		// return mail()
-	}		
+
+        public function refresh(){
+
+            //------------------REFRESH PAGE AFTER SENDING--------------------------
+            $page = $_SERVER['PHP_SELF'];
+            $sec = "2";
+            unset($_POST);
+            header("Refresh: $sec; url=$page");
+        }
 }

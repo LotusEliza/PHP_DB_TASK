@@ -10,7 +10,7 @@
 
     function add(iWorkData $obj){
         $key="name";
-        $val="Test";
+        $val="Test2";
         return $obj->saveData($key, $val);
     }
 

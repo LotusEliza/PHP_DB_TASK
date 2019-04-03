@@ -45,3 +45,9 @@ option {
   color: black;
 }
 
+span.error{
+  color:red;
+  float: right;
+  font-size: small;
+}
+
