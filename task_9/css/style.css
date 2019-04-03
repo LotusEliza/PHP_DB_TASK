@@ -17,3 +17,22 @@ td {
     background: #FAFAFA; /* Lighter grey background */
     text-align: center; /* Center our text */
 }
+
+.test1{
+    color: red;
+    font-weight: bold;
+    font-size: 50px;
+}
+
+
+.test2{
+    color: greenyellow;
+    font-weight: lighter;
+    font-size: 10px;
+}
+
+.test3{
+    color: blue;
+    font-weight: bolder;
+    font-size: 30px;
+}

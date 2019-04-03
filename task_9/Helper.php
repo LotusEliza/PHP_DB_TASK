@@ -64,6 +64,33 @@ class Helper{
          <?php
     }
 
+    static function multiSelect($class, $names, $array){
+        ?>
+                <form method="post" action="value.php">
+                        <select name="flower[ ]" multiple class="<?php echo $class; ?>">
+                        <?php
+                        foreach($array as $item){
+                        ?>
+                            <option value="flower"> <?php echo $item; ?></option>
+                        <?php
+                        }
+                        ?>
+                        </select>
+                        <input type="submit" name="submit" value=Submit>
+                </form>
+<?php
+    }
+
+}
+// https://stackoverflow.com/questions/2407284/how-to-get-multiple-selected-values-of-select-box-in-php
+// <?php
+// foreach ($_POST['flower'] as $names)
+// {
+//         print "You are selected $names<br/>";
+// }
+
+//
+
     //  static function removeCol($code){
     //      var_dump($code);
     //     $code = preg_replace( '/(<tr.*)(<td.*)(<\\/tr.*)/is', '\\1\\3', $code );   
