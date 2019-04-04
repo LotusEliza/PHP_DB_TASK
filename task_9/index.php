@@ -1,17 +1,16 @@
 <?php
 include 'Helper.php';
 
-$color="blue";
-$logo="Hello World";
-$bgcol="green";
-$text = "Footer text";
-$received = Helper::addHeader($logo, $color, $bgcol);
+//сделать класс Html Helper реализующий select-multi, table, ul-ol, dl-dt-dd, radiobuttons-group, checkboxes
 
+    $logo="Hello World";
+    $text = "Footer text";
+    $ulol = "ul"; //choose ol or ul list
+    $class="test1"; //*test1 , *test2, *test3
 
-$array = Helper::arrayForm("db.json");
-$received = Helper::createTable($array['items']);
+    $flowers = array("flower1"=>"rose", "flower2"=>"lilac", "flower3"=>"pansy", "flower4"=>"poppy", "flower5"=>"iris");
+    $array = Helper::arrayForm("db.json");
 
-$received = Helper::addFooter($text, $color, $bgcol);
 
 
 include 'templates/index.php';

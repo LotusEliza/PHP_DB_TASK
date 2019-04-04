@@ -4,6 +4,7 @@ table {
     width: 640px;
     border-collapse: collapse;
     border-spacing: 0;
+    text-align: center; /* Center our text */
 }
 
 td, th { border: 1px solid #CCC; height: 30px; } /* Make cells a bit taller */
@@ -11,6 +12,7 @@ td, th { border: 1px solid #CCC; height: 30px; } /* Make cells a bit taller */
 th {
     background: #F3F3F3; /* Light grey background */
     font-weight: bold; /* Make sure they're bold */
+
 }
 
 td {
@@ -21,18 +23,38 @@ td {
 .test1{
     color: red;
     font-weight: bold;
-    font-size: 50px;
+    font-size: 30px;
+    background-color: lightpink;
 }
 
-
 .test2{
-    color: greenyellow;
-    font-weight: lighter;
-    font-size: 10px;
+    color: darkgreen;
+    /*font-weight: lighter;*/
+    font-size: 20px;
+    background-color: #CCCCCC;
 }
 
 .test3{
     color: blue;
     font-weight: bolder;
     font-size: 30px;
+    background-color: coral;
+}
+
+ header {
+     padding-bottom: 20px;
+     margin-bottom: 50px;
+     padding-top: 30px;
+     text-align: center;
+     font-size: 35px;
+     /*color: <?php echo $color; ?>;*/
+ }
+
+ footer {
+     padding: 10px;
+     text-align: center;
+}
+
+.row{
+    padding: 30px;
 }
