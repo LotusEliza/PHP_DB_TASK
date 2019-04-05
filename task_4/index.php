@@ -3,6 +3,7 @@
 include 'config.php';
 include 'SQL.php';
 include 'Mysql.php';
+include 'Postgresql.php';
 
 //$first = new SQL();
 
@@ -26,5 +27,26 @@ $mysql1 = $first->f_insert();
 $mysql2 = $first->f_select();
 $mysql3 = $first->f_update();
 $mysql4 = $first->f_delete();
+
+
+$second = new Postgresql();
+$second->__set_field('`name`');
+$second->__set_field('`age`');
+$second->__set_field('`city`');
+
+$second->__set_value('\'Met\'');
+$second->__set_value('\'29\'');
+$second->__set_value('\'Niko\'');
+
+$second->__set_where('`name` = \'liza\'');
+//$first->__set_where('age = 29');
+//$first->__set_where('city = Niko');
+
+$second->__set_table('test_table');
+$mysql1 = $first->f_insert();
+$mysql2 = $first->f_select();
+$mysql3 = $first->f_update();
+$mysql4 = $first->f_delete();
+
 
 include 'templates/index.php';

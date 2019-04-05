@@ -64,3 +64,10 @@ class Postgresql extends SQL
     }
 
 }
+
+// CREATE TABLE test_table(
+//     id INT PRIMARY KEY     NOT NULL,
+//     name           TEXT    NOT NULL,
+//     city           TEXT    NOT NULL,
+//     age            INT     NOT NULL,
+//  );

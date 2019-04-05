@@ -46,6 +46,7 @@ class Mysql extends SQL
 
     public function f_insert(){
         parent::f_insert();
+        var_dump($this->query);
         $result = mysql_query($this->query, $this->link);
 
         if ($result === TRUE) {
