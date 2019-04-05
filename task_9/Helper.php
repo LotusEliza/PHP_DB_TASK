@@ -4,22 +4,20 @@ class Helper{
 
     static function createTable($files) {
         if (count($files) > 0):
-            ?>
-            <table align="center">
-                <thead>
-                <tr>
-                    <th><?php echo implode('</th><th>', array_keys(current($files))); ?></th>
-                </tr>
-                </thead>
-                <tbody>
-                <?php foreach ($files as $row): array_map('htmlentities', $row); ?>
-                    <tr>
-                        <td><?php echo implode('</td><td>', $row); ?></td>
-                    </tr>
-                <?php endforeach; ?>
-                </tbody>
-            </table>
-        <?php endif;
+
+            $result = "<table align=\"center\"><thead><tr>";
+            $result .= "<th>";
+            $result .= implode('</th><th>', array_keys(current($files)));
+            $result .= "</th>";
+            $result .= "</tr></thead><tbody>";
+                foreach ($files as $row): array_map('htmlentities', $row);
+                    $result .= "<tr><td>";
+                    $result .= implode('</td><td>', $row);
+                    $result .= "</td></tr>";
+                endforeach;
+                $result .= "</tbody></table>";
+         endif;
+         return $result;
      }
 
      static function arrayForm($file){
@@ -27,64 +25,57 @@ class Helper{
         return $array;
      }
 
-     static function addHeader($logo, $class){
-         ?>
-          <header class="<?=$class;?>">
-          <h2><?php echo $logo; ?></h2>
-          </header>
-          <?php
-     }
-
-     static function addFooter($text, $class){
-        ?>
-         <footer class="<?=$class; ?>">
-            <p><?php echo $text; ?></p>
-         </footer>
-         <?php
-    }
 
     static function checkBox($array)
     {
+        $result="";
         foreach ($array as $key => $item) {
-            echo "<input type = \"checkbox\" name = \"vehicle1\" value = \"" . $key . "\" >" . $item . "<br>";
+            $result .= "<input type = \"checkbox\" name = \"vehicle1\" value = \"" . $key . "\" >" . $item . "<br>";
         }
+        return $result;
     }
 
     static function multiSelect($class, $array){
-        echo "<form method=\"POST\" action=\"\">";
-        echo "<select name=\"flower[ ]\" multiple class=\" . $class  . \">";
+
+        $result = "<form method=\"POST\" action=\"\">";
+        $result .= "<select name=\"flower[ ]\" multiple class=\" . $class  . \">";
         foreach($array as $key=>$item){
-            echo "<option value=\"" . $key . "\">" . $item . "</option>";
+            $result .= "<option value=\"" . $key . "\">" . $item . "</option>";
         }
-        echo "</select> <br>";
-        echo "<input type=\"submit\" name=\"submit\" value=Submit>";
-        echo "</form>";
+        $result .= "</select> <br>";
+        $result .= "<input type=\"submit\" name=\"submit\" value=Submit>";
+        $result .= "</form>";
+        return $result;
     }
 
     static function radioButton($class, $array){
-        echo "<form action=\"\" class='" . $class . "'>";
+        $result = "<form action=\"\" class='" . $class . "'>";
         foreach ($array as $key => $item) {
-            echo "<input type=\"radio\" name=\"gender\" value=\"" . $key . "\">" . $item . "<br>";
+            $result .= "<input type=\"radio\" name=\"gender\" value=\"" . $key . "\">" . $item . "<br>";
         }
-        echo "</form>";
+        $result .= "</form>";
+        return $result;
     }
 
     static function f_list($class, $ulol, $array){
-        echo "<" . $ulol .">";
+        $result =  "<" . $ulol .">";
         foreach ($array as $item){
-            echo "<li  class='" . $class . "'>" . $item . "</li>";
+            $result .= "<li  class='" . $class . "'>" . $item . "</li>";
         }
-        echo "</" . $ulol . ">";
+        $result .= "</" . $ulol . ">";
+        return $result;
     }
 
     static function descriptionList($class, $array){
-        echo "<dl class=\"" . $class . "\">";
+        $result = "<dl class=\"" . $class . "\">";
             foreach ($array as $row => $value){
-                    echo "<dt>" . $row . "</dt>";
-                    echo "<dd>" . $value . "</dd>";
+                $result .= "<dt>" . $row . "</dt>";
+                $result .= "<dd>" . $value . "</dd>";
             }
-        echo "</dl>";
+        $result .= "</dl>";
+        return $result;
     }
+
 }
 
 // https://stackoverflow.com/questions/2407284/how-to-get-multiple-selected-values-of-select-box-in-php

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>%TITLE%</title>
+	<title>Task9</title>
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -10,25 +10,25 @@
 </head>
 <body>
 
-<?php Helper::addHeader($logo, $class);?>
+
 <div class="container">
     <div class="row">
         <div class="col-10">
-            <?php Helper::createTable($array['items']);?>
+            <?=$table;?>
         </div>
         <div class="col-2">
-            <?php Helper::checkBox($flowers);?>
+            <?=$checkbox;?>
         </div>
         </div>
 
         <div class="row">
-            <div class="col"><?php Helper::multiSelect($class, $flowers);?></div>
-            <div class="col"><?php Helper::descriptionList($class, $flowers); ?></div>
-            <div class="col"><?php Helper::radioButton($class, $flowers); ?></div>
-            <div class="col"><?php Helper::f_list($class, $ulol, $flowers); ?></div>
+            <div class="col"><?=$desclist;?></div>
+            <div class="col"><?=$radio;?></div>
+            <div class="col"><?=$list;?></div>
+            <div class="col"><?=$multi;?></div>
         </div>
     </div>
-<?php Helper::addFooter($text, $class); ?>
+<?php //Helper::addFooter($text, $class); ?>
 
 </body>
 </html>

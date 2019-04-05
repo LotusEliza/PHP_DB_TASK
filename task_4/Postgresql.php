@@ -12,29 +12,27 @@ class Postgresql extends SQL
 
     function __construct()
     {
-
+        $this->link = pg_connect("host=DB_HOST port=5432 dbname=DB_NAME user=DB_USER password=DB_PASS")or die('connection failed');
     }
 
     public function f_select(){
         parent::f_select();
-        $query = $this->query;
-        $result = mysql_query($query, $this->link);
+        $result = pg_query($this->link,"$this->query");
 
-        if (!$result){
-            return ERROR_MYSQL . mysql_error();
-
+        if (!$result) {
+            return ERROR_PG;
         }else{
             $array_result=[];
-            while ($row = mysql_fetch_assoc($result)) {
+            while ($row = pg_fetch_assoc($result)) {
                 $array_result[] = array('name'=>$row["name"], 'city'=>$row["city"], 'age'=>$row["age"]);
             }
-            return $array_result;
+            return  $array_result;
         }
     }
 
     public function f_update(){
         parent::f_update();
-        $result = mysql_query($this->query, $this->link);
+        $result = pg_query($this->link,"$this->query");
 
         if ($result === TRUE) {
             return ITEM_UPD;
@@ -45,7 +43,7 @@ class Postgresql extends SQL
 
     public function f_insert(){
         parent::f_insert();
-        $result = mysql_query($this->query, $this->link);
+        $result = pg_query($this->link,"$this->query");
 
         if ($result === TRUE) {
             return ITEM_INS;
@@ -56,7 +54,7 @@ class Postgresql extends SQL
 
     public function f_delete(){
         parent::f_delete();
-        $result = mysql_query($this->query, $this->link);
+        $result = pg_query($this->link,"$this->query");
 
         if ($result === TRUE) {
             return ITEM_REM;
