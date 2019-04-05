@@ -6,15 +6,13 @@
  * Time: 7:12 PM
  */
 
-class Mysql extends SQL
+class Postgresql extends SQL
 {
     protected $link;
 
     function __construct()
     {
-        $this->link = mysql_connect(DB_HOST, DB_USER, DB_PASS)
-        or die("Could not connect: " . mysql_error());
-        mysql_select_db(DB_NAME) or die(mysql_error());
+
     }
 
     public function f_select(){
@@ -66,4 +64,5 @@ class Mysql extends SQL
             return ERROR_REM;
         }
     }
+
 }
