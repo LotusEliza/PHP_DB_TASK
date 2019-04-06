@@ -6,16 +6,17 @@
  * Time: 11:39 AM
  */
 
-// define('DB_USER', 'phpmyadmin');
-// define('DB_PASS', '12122');
-// define('DB_NAME', 'test');
-// define('DB_HOST', 'localhost');
-
-define('DB_USER', 'user3');
-define('DB_PASS', 'user3');
-define('DB_NAME', 'user3');
+define('DB_USER', 'phpmyadmin');
+define('DB_PASS', '12122');
+define('DB_NAME', 'test');
 define('DB_HOST', 'localhost');
 
+
+
+define('PG_USER', 'user3');
+define('PG_PASS', '12122');
+define('PG_NAME', 'user3');
+define('PG_HOST', 'localhost');
 
 
 define("ITEM_INS", "Created!");

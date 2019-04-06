@@ -6,33 +6,36 @@
  * Time: 7:12 PM
  */
 
-class Postgresql extends SQL
+class Mysql extends SQL
 {
     protected $link;
 
     function __construct()
     {
-        $this->link = pg_connect("host=DB_HOST port=5432 dbname=DB_NAME user=DB_USER password=DB_PASS")or die('connection failed');
+        $this->link = mysql_connect(DB_HOST, DB_USER, DB_PASS)
+        or die("Could not connect: " . mysql_error());
+        mysql_select_db(DB_NAME) or die(mysql_error());
     }
 
     public function f_select(){
         parent::f_select();
-        $result = pg_query($this->link,"$this->query");
+        $result = mysql_query($this->query, $this->link);
 
-        if (!$result) {
-            return ERROR_PG;
+        if (!$result){
+            return ERROR_MYSQL . mysql_error();
+
         }else{
             $array_result=[];
-            while ($row = pg_fetch_assoc($result)) {
+            while ($row = mysql_fetch_assoc($result)) {
                 $array_result[] = array('name'=>$row["name"], 'city'=>$row["city"], 'age'=>$row["age"]);
             }
-            return  $array_result;
+            return $array_result;
         }
     }
 
     public function f_update(){
         parent::f_update();
-        $result = pg_query($this->link,"$this->query");
+        $result = mysql_query($this->query, $this->link);
 
         if ($result === TRUE) {
             return ITEM_UPD;
@@ -43,7 +46,7 @@ class Postgresql extends SQL
 
     public function f_insert(){
         parent::f_insert();
-        $result = pg_query($this->link,"$this->query");
+        $result = mysql_query($this->query, $this->link);
 
         if ($result === TRUE) {
             return ITEM_INS;
@@ -54,7 +57,7 @@ class Postgresql extends SQL
 
     public function f_delete(){
         parent::f_delete();
-        $result = pg_query($this->link,"$this->query");
+        $result = mysql_query($this->query, $this->link);
 
         if ($result === TRUE) {
             return ITEM_REM;
@@ -62,12 +65,4 @@ class Postgresql extends SQL
             return ERROR_REM;
         }
     }
-
 }
-
-// CREATE TABLE test_table(
-//     id INT PRIMARY KEY     NOT NULL,
-//     name           TEXT    NOT NULL,
-//     city           TEXT    NOT NULL,
-//     age            INT     NOT NULL,
-//  );
