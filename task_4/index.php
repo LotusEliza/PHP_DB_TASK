@@ -1,37 +1,78 @@
 <?php
 
 include 'config.php';
-include 'libs/SQL.php';
-include 'libs/Mysql.php';
-include 'libs/Postgresql.php';
-
-//$first = new SQL();
-
-//$first = new Mysql();
-$first = new Postgresql();
-
-$first->__set_field('`name`');
-$first->__set_field('`age`');
-$first->__set_field('`city`');
-
-$first->__set_value('\'Met\'');
-$first->__set_value('\'29\'');
-$first->__set_value('\'Niko\'');
-
-$first->__set_where('`name` = \'liza\'');
-//$first->__set_where('age = 29');
-//$first->__set_where('city = Niko');
-
-//$first->__set_table('test_table');
-$first->__set_table('user3');
-//$mysql1 = $first->f_insert();
-$mysql2 = $first->f_select();
-//$mysql3 = $first->f_update();
-//$mysql4 = $first->f_delete();
-
-var_dump($mysql2);
+include 'autoload.php';
 
 
+function insert(iData $obj){
+    return $obj->f_insert();
+}
+
+function select(iData $obj){
+    return $obj->f_select();
+}
+
+function update(iData $obj){
+    return $obj->f_update();
+}
+
+function delete(iData $obj){
+    return $obj->f_delete();
+}
+
+$objMysql = new Mysql();
+$objMysql->__set_table('user3');
+$objMysql->__set_limit("2");
+
+$objMysql->__set_field('name');
+$objMysql->__set_field('age');
+$objMysql->__set_field('city');
+
+$objMysql->__set_value('\'Suzy\'');
+$objMysql->__set_value('\'15\'');
+$objMysql->__set_value('\'Niko\'');
+
+$objMysql->__set_where('name = \'Suzy\'');
+$objMysql->__set_where('age = 15');
+
+//--------------MySQL RESULTS-----------------
+$my_insert = insert($objMysql);
+$my_select = select($objMysql);
+$my_update = update($objMysql);
+$my_delete = delete($objMysql);
+
+//$my_insert = $objMysql->f_insert();
+//$my_select = $objMysql->f_select();
+//$my_update = $objMysql->f_update();
+//$my_delete = $objMysql->f_delete();
+
+
+$objPostgr = new Postgresql();
+$objPostgr->__set_table('user3');
+$objPostgr->__set_limit("2");
+
+$objPostgr->__set_field('name');
+$objPostgr->__set_field('age');
+$objPostgr->__set_field('city');
+
+$objPostgr->__set_value('\'Suzy\'');
+$objPostgr->__set_value('\'15\'');
+$objPostgr->__set_value('\'Niko\'');
+
+$objPostgr->__set_where('name = \'Suzy\'');
+$objPostgr->__set_where('age = 15');
+
+
+//--------------PG RESULTS-----------------
+$pg_insert = insert($objPostgr);
+$pg_select = select($objPostgr);
+$pg_update = update($objPostgr);
+$pg_delete = delete($objPostgr);
+
+//$pg_insert = $objPostgr->f_insert();
+//$pg_select = $objPostgr->f_select();
+//$pg_update = $objPostgr->f_update();
+//$pg_delete = $objPostgr->f_delete();
 
 
 include 'templates/index.php';

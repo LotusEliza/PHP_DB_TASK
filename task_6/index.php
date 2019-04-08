@@ -1,8 +1,8 @@
 <?php
 include 'config.php';
-include 'Instrument.php';
-include 'Musician.php';
-include 'Band.php';
+include 'libs/Instrument.php';
+include 'libs/Musician.php';
+include 'libs/Band.php';
 include 'config.php';
 
 

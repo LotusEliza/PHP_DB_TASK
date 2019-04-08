@@ -9,39 +9,102 @@
 // Практика - сделать класс для MySQL/PostgreSQL на PDO c применением “Текучего Интерфейса”
 // (должно быть использование prepare, execute, bindParam для безопасного выполнения SQL)
 
-
-include 'Sql.php';
-include 'Pdo.php';
 include 'config.php';
+include 'autoload.php';
+
 
 $objPdo = new PdoCl();
+$objPdo->__set_table('orders');
+//$objPdo->__set_table2('customers');
 
 
-// $first = new Mysql();
-$objPdo->__set_field('`name`');
-$objPdo->__set_field('`age`');
-$objPdo->__set_field('`city`');
+$objPdo->__set_field('`customerID`');
+$objPdo->__set_field('`description`');
+$objPdo->__set_field2('`customerName`');
+$objPdo->__set_onfield('`customerID`');
+$objPdo->__set_onfield2('`customerID`');
 
-$objPdo->__set_value('liza');
-$objPdo->__set_value('29');
-$objPdo->__set_value('Niko');
+$objPdo->__set_join('cross');
+$objPdo->__set_group('`orderID`');
+$objPdo->__set_order('`description`');
 
-$objPdo->__set_where('`name` = \'liza\'');
-// $objPdo->__set_innerjoin();
+$objPdo->__set_value('3');
+$objPdo->__set_value('ball');
+$objPdo->__set_where_f('`customerID`');
+$objPdo->__set_where_v(4);
+$objPdo->__set_having('`customerID` = 3');
+
+
+
+//$result = $objPdo->f_select()->f_from()->f_join()->exec_select();
+//$result = $objPdo->f_select()->f_from()->having()->exec_select();
+//$result = $objPdo->f_select()->f_from()->group_by()->exec_select();
+//$result = $objPdo->f_select()->f_from()->order_by()->exec_select();
+//$result = $objPdo->f_update()->f_where()->exec_update();
+$result = $objPdo->f_delete()->f_where()->exec_delete();
+//$result = $objPdo->f_insert()->exec_insert();
+
+var_dump($result);
+
+include 'templates/index.php';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//$objPdo->__set_field('`city`');
+//$objPdo->__set_value('Liza');
+//$objPdo->__set_value('29');
+//$objPdo->__set_value('Niko');
+//$objPdo->__set_where('`city` = \'Niko\'');
 // $objPdo->__set_where('age = 29');
 // $objPdo->__set_where('city = Niko');
 
 
-$objPdo->__set_table('test_table');
+//$result = $objPdo->f_select()->f_from()->f_where()->exec();
 
-$result = $objPdo->f_select()->f_from()->f_where()->exec();
-// var_dump($result);
+
 // $result = $objPdo->f_select()->f_from()->f_where()->exec();
-
 // $result = $objPdo->f_select()->f_from()->f_where();
 
 
 
 
 
-include 'templates/index.php';
+
+//$objPdo = new PdoCl();
+//$objPdo->__set_table('user3');
+//
+//// $first = new Mysql();
+//$objPdo->__set_field('`name`');
+//$objPdo->__set_field('`age`');
+//$objPdo->__set_field('`city`');
+//
+//$objPdo->__set_value('Liza');
+//$objPdo->__set_value('29');
+//$objPdo->__set_value('Niko');
+//
+//$objPdo->__set_where('`city` = \'Niko\'');
+

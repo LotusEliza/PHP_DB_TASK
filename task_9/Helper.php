@@ -77,5 +77,3 @@ class Helper{
     }
 
 }
-
-// https://stackoverflow.com/questions/2407284/how-to-get-multiple-selected-values-of-select-box-in-php

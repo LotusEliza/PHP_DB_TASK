@@ -6,7 +6,7 @@
  * Time: 7:12 PM
  */
 
-class Mysql extends SQL
+class Mysql extends SQL implements iData
 {
     protected $link;
 
@@ -64,5 +64,10 @@ class Mysql extends SQL
         } else {
             return ERROR_REM;
         }
+    }
+
+    public function __destruct()
+    {
+        mysql_close($this->link);
     }
 }
