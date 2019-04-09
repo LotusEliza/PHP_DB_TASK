@@ -11,7 +11,6 @@ protected $db;
     {
         try {
             $this->db = DB::getInstance();
-            DB::setCharsetEncoding();
         } catch (Exception $e) {
             print $e->getMessage();
         }
@@ -19,6 +18,7 @@ protected $db;
 
     public function exec_select(){
         $stm = $this->db->prepare($this->query);
+        var_dump($this->query);
         $stm->execute();
         $result = $stm->fetchAll(PDO::FETCH_ASSOC);
         if (!$result){
@@ -30,6 +30,7 @@ protected $db;
 
     public function exec_insert(){
         $stm = $this->db->prepare($this->query);
+        var_dump($this->query);
         foreach ($this->values as $key => &$value){
             $stm->bindParam(':'.$key, $value, PDO::PARAM_STR);
         }
@@ -45,6 +46,7 @@ protected $db;
 
     public function exec_update(){
         $stm = $this->db->prepare($this->query);
+        var_dump($this->query);
         foreach ($this->values as $key => &$value){
             $stm->bindParam(':'.$key, $value, PDO::PARAM_STR);
         }
@@ -60,6 +62,7 @@ protected $db;
 
     public function exec_delete(){
         $stm = $this->db->prepare($this->query);
+        var_dump($this->query);
         foreach ($this->where_v as $key => &$value){
             $stm->bindParam(':'.$key, $value, PDO::PARAM_STR);
         }
