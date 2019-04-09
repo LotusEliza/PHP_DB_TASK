@@ -97,19 +97,37 @@ class SQL
 
 
     public function f_select(){
-       if(!$this->table2){
            $fields_str = implode(", ", $this->fields);
+           var_dump($fields_str);
            $this->query .= "SELECT $fields_str";
            return $this;
-       }else{
-           $array = $this->tabl_field($this->fields, $this->table);
-           $array2 = $this->tabl_field($this->fields2, $this->table2);
-           $fields_str = implode(", ", $array);
-           $fields_str2 = implode(", ", $array2);
+    }
 
-           $this->query .= "SELECT $fields_str, $fields_str2 ";
-           return $this;
-       }
+//    public function f_select(){
+//        if(!$this->table2){
+//            $fields_str = implode(", ", $this->fields);
+//            $this->query .= "SELECT $fields_str";
+//            return $this;
+//        }else{
+//            $array = $this->tabl_field($this->fields, $this->table);
+//            $array2 = $this->tabl_field($this->fields2, $this->table2);
+//            $fields_str = implode(", ", $array);
+//            $fields_str2 = implode(", ", $array2);
+//
+//            $this->query .= "SELECT $fields_str, $fields_str2 ";
+//            return $this;
+//        }
+//    }
+
+    public function f_select2(){
+
+            $array = $this->tabl_field($this->fields, $this->table);
+            $array2 = $this->tabl_field($this->fields2, $this->table2);
+            $fields_str = implode(", ", $array);
+            $fields_str2 = implode(", ", $array2);
+
+            $this->query .= "SELECT $fields_str, $fields_str2 ";
+            return $this;
     }
 
      public function f_join(){
@@ -144,7 +162,7 @@ class SQL
     }
 
     public function f_from(){
-        $this->query .= " FROM `$this->table`";
+        $this->query .= " FROM $this->table";
         return $this;
     }
 
