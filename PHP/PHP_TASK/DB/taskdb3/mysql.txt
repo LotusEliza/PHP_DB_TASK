@@ -1,0 +1,352 @@
+
+
+______________________WITHOUT INDEXEX__________________________________
+
+-----WITHOUT EXPLAIN--------------------------------------------------
+
+-------------------------------INNER JOIN--------------------------
+SELECT * FROM TableA INNER JOIN TableB ON TableA.name = TableB.name
++----+--------+----+--------+
+| id | name   | id | name   |
++----+--------+----+--------+
+|  1 | Pirate |  2 | Pirate |
+|  3 | Ninja  |  4 | Ninja  |
++----+--------+----+--------+
+2 rows in set (0.01 sec)
+
+-------------------------------FULL OUTER JOIN ON--------------------------
+    SELECT * FROM TableA FULL OUTER JOIN ON TableA.name = TableB.name;
+
+is equivalent to
+
+    (SELECT * FROM TableA LEFT JOIN TableB ON TableA.id=TableB.id)
+    UNION
+    (SELECT * FROM TableA RIGHT JOIN TableB ON TableA.id=TableB.id)
+
++------+-----------+------+-------------+
+| id   | name      | id   | name        |
++------+-----------+------+-------------+
+|    1 | Pirate    |    1 | Rutabaga    |
+|    2 | Monkey    |    2 | Pirate      |
+|    3 | Ninja     |    3 | Darth Vader |
+|    4 | Spaghetti |    4 | Ninja       |
++------+-----------+------+-------------+
+4 rows in set (0.19 sec)
+
+SELECT * FROM TableA LEFT OUTER JOIN TableB ON TableA.name = TableB.name;
+
++----+-----------+------+--------+
+| id | name      | id   | name   |
++----+-----------+------+--------+
+|  1 | Pirate    |    2 | Pirate |
+|  3 | Ninja     |    4 | Ninja  |
+|  2 | Monkey    | NULL | NULL   |
+|  4 | Spaghetti | NULL | NULL   |
++----+-----------+------+--------+
+4 rows in set (0.01 sec)
+
+SELECT * FROM TableA LEFT OUTER JOIN TableB ON TableA.name = TableB.name WHERE TableB.id IS null;
+
++----+-----------+------+------+
+| id | name      | id   | name |
++----+-----------+------+------+
+|  2 | Monkey    | NULL | NULL |
+|  4 | Spaghetti | NULL | NULL |
++----+-----------+------+------+
+2 rows in set (0.00 sec)
+
+
+    SELECT * FROM TableA FULL OUTER JOIN TableB ON TableA.name = TableB.name WHERE TableA.id IS null OR TableB.id IS null;
+
+is equivalent to
+
+    (SELECT * FROM TableA LEFT JOIN TableB ON TableA.name=TableB.name WHERE TableA.id IS null OR TableB.id IS null)
+    UNION
+    (SELECT * FROM TableA RIGHT JOIN TableB ON TableA.name=TableB.name WHERE TableA.id IS null OR TableB.id IS null)
+
++------+-----------+------+-------------+
+| id   | name      | id   | name        |
++------+-----------+------+-------------+
+|    2 | Monkey    | NULL | NULL        |
+|    4 | Spaghetti | NULL | NULL        |
+| NULL | NULL      |    1 | Rutabaga    |
+| NULL | NULL      |    3 | Darth Vader |
++------+-----------+------+-------------+
+4 rows in set (0.00 sec)
+
+
+SELECT * FROM TableA CROSS JOIN TableB;
+
++----+-----------+----+-------------+
+| id | name      | id | name        |
++----+-----------+----+-------------+
+|  1 | Pirate    |  1 | Rutabaga    |
+|  2 | Monkey    |  1 | Rutabaga    |
+|  3 | Ninja     |  1 | Rutabaga    |
+|  4 | Spaghetti |  1 | Rutabaga    |
+|  1 | Pirate    |  2 | Pirate      |
+|  2 | Monkey    |  2 | Pirate      |
+|  3 | Ninja     |  2 | Pirate      |
+|  4 | Spaghetti |  2 | Pirate      |
+|  1 | Pirate    |  3 | Darth Vader |
+|  2 | Monkey    |  3 | Darth Vader |
+|  3 | Ninja     |  3 | Darth Vader |
+|  4 | Spaghetti |  3 | Darth Vader |
+|  1 | Pirate    |  4 | Ninja       |
+|  2 | Monkey    |  4 | Ninja       |
+|  3 | Ninja     |  4 | Ninja       |
+|  4 | Spaghetti |  4 | Ninja       |
++----+-----------+----+-------------+
+16 rows in set (0.00 sec)
+
+
+
+
+
+-----WITH EXPLAIN--------------------------------------------------
+
+EXPLAIN SELECT * FROM TableA INNER JOIN TableB ON TableA.name = TableB.name
+
++----+-------------+--------+------------+------+---------------+------+---------+------+------+----------+----------------------------------------------------+
+| id | select_type | table  | partitions | type | possible_keys | key  | key_len | ref  | rows | filtered | Extra                                              |
++----+-------------+--------+------------+------+---------------+------+---------+------+------+----------+----------------------------------------------------+
+|  1 | SIMPLE      | TableA | NULL       | ALL  | NULL          | NULL | NULL    | NULL |    4 |   100.00 | NULL                                               |
+|  1 | SIMPLE      | TableB | NULL       | ALL  | NULL          | NULL | NULL    | NULL |    4 |    25.00 | Using where; Using join buffer (Block Nested Loop) |
++----+-------------+--------+------------+------+---------------+------+---------+------+------+----------+----------------------------------------------------+
+2 rows in set, 1 warning (0.00 sec)
+
+
+EXPLAIN SELECT * FROM TableA FULL OUTER JOIN TableB ON TableA.name = TableB.name;
+
++----+--------------+------------+------------+------+---------------+------+---------+------+------+----------+----------------------------------------------------+
+| id | select_type  | table      | partitions | type | possible_keys | key  | key_len | ref  | rows | filtered | Extra                                              |
++----+--------------+------------+------------+------+---------------+------+---------+------+------+----------+----------------------------------------------------+
+|  1 | PRIMARY      | TableA     | NULL       | ALL  | NULL          | NULL | NULL    | NULL |    4 |   100.00 | NULL                                               |
+|  1 | PRIMARY      | TableB     | NULL       | ALL  | NULL          | NULL | NULL    | NULL |    4 |   100.00 | Using where; Using join buffer (Block Nested Loop) |
+|  2 | UNION        | TableB     | NULL       | ALL  | NULL          | NULL | NULL    | NULL |    4 |   100.00 | NULL                                               |
+|  2 | UNION        | TableA     | NULL       | ALL  | NULL          | NULL | NULL    | NULL |    4 |   100.00 | Using where; Using join buffer (Block Nested Loop) |
+| NULL | UNION RESULT | <union1,2> | NULL       | ALL  | NULL          | NULL | NULL    | NULL | NULL |     NULL | Using temporary                                    |
++----+--------------+------------+------------+------+---------------+------+---------+------+------+----------+----------------------------------------------------+
+5 rows in set, 1 warning (0.00 sec)
+
+
+EXPLAIN SELECT * FROM TableA LEFT OUTER JOIN TableB ON TableA.name = TableB.name;
+
++----+-------------+--------+------------+------+---------------+------+---------+------+------+----------+----------------------------------------------------+
+| id | select_type | table  | partitions | type | possible_keys | key  | key_len | ref  | rows | filtered | Extra                                              |
++----+-------------+--------+------------+------+---------------+------+---------+------+------+----------+----------------------------------------------------+
+|  1 | SIMPLE      | TableA | NULL       | ALL  | NULL          | NULL | NULL    | NULL |    4 |   100.00 | NULL                                               |
+|  1 | SIMPLE      | TableB | NULL       | ALL  | NULL          | NULL | NULL    | NULL |    4 |   100.00 | Using where; Using join buffer (Block Nested Loop) |
++----+-------------+--------+------------+------+---------------+------+---------+------+------+----------+----------------------------------------------------+
+2 rows in set, 1 warning (0.00 sec)
+
+
+EXPLAIN SELECT * FROM TableA LEFT OUTER JOIN TableB ON TableA.name = TableB.name WHERE TableB.id IS null;
+
++----+-------------+--------+------------+------+---------------+------+---------+------+------+----------+----------------------------------------------------------------+
+| id | select_type | table  | partitions | type | possible_keys | key  | key_len | ref  | rows | filtered | Extra                                                          |
++----+-------------+--------+------------+------+---------------+------+---------+------+------+----------+----------------------------------------------------------------+
+|  1 | SIMPLE      | TableA | NULL       | ALL  | NULL          | NULL | NULL    | NULL |    4 |   100.00 | NULL                                                           |
+|  1 | SIMPLE      | TableB | NULL       | ALL  | NULL          | NULL | NULL    | NULL |    4 |    25.00 | Using where; Not exists; Using join buffer (Block Nested Loop) |
++----+-------------+--------+------------+------+---------------+------+---------+------+------+----------+----------------------------------------------------------------+
+2 rows in set, 1 warning (0.00 sec)
+
+
+EXPLAIN SELECT * FROM TableA FULL OUTER JOIN TableB ON TableA.name = TableB.name WHERE TableA.id IS null OR TableB.id IS null;
+
++----+--------------+------------+------------+------+---------------+------+---------+------+------+----------+----------------------------------------------------------------+
+| id | select_type  | table      | partitions | type | possible_keys | key  | key_len | ref  | rows | filtered | Extra                                                          |
++----+--------------+------------+------------+------+---------------+------+---------+------+------+----------+----------------------------------------------------------------+
+|  1 | PRIMARY      | TableA     | NULL       | ALL  | NULL          | NULL | NULL    | NULL |    4 |   100.00 | NULL                                                           |
+|  1 | PRIMARY      | TableB     | NULL       | ALL  | NULL          | NULL | NULL    | NULL |    4 |    25.00 | Using where; Not exists; Using join buffer (Block Nested Loop) |
+|  2 | UNION        | TableB     | NULL       | ALL  | NULL          | NULL | NULL    | NULL |    4 |   100.00 | NULL                                                           |
+|  2 | UNION        | TableA     | NULL       | ALL  | NULL          | NULL | NULL    | NULL |    4 |    25.00 | Using where; Not exists; Using join buffer (Block Nested Loop) |
+| NULL | UNION RESULT | <union1,2> | NULL       | ALL  | NULL          | NULL | NULL    | NULL | NULL |     NULL | Using temporary                                                |
++----+--------------+------------+------------+------+---------------+------+---------+------+------+----------+----------------------------------------------------------------+
+5 rows in set, 1 warning (0.00 sec)
+
+
+EXPLAIN SELECT * FROM TableA CROSS JOIN TableB
+
++----+-------------+--------+------------+------+---------------+------+---------+------+------+----------+---------------------------------------+
+| id | select_type | table  | partitions | type | possible_keys | key  | key_len | ref  | rows | filtered | Extra                                 |
++----+-------------+--------+------------+------+---------------+------+---------+------+------+----------+---------------------------------------+
+|  1 | SIMPLE      | TableA | NULL       | ALL  | NULL          | NULL | NULL    | NULL |    4 |   100.00 | NULL                                  |
+|  1 | SIMPLE      | TableB | NULL       | ALL  | NULL          | NULL | NULL    | NULL |    4 |   100.00 | Using join buffer (Block Nested Loop) |
++----+-------------+--------+------------+------+---------------+------+---------+------+------+----------+---------------------------------------+
+2 rows in set, 1 warning (0.00 sec)
+
+
+
+
+
+
+______________________WITH INDEXEX__________________________________
+
+-----WITHOUT EXPLAIN--------------------------------------------------
+
+SELECT * FROM TableA INNER JOIN TableB ON TableA.name = TableB.name;
+
++----+--------+----+--------+
+| id | name   | id | name   |
++----+--------+----+--------+
+|  1 | Pirate |  2 | Pirate |
+|  3 | Ninja  |  4 | Ninja  |
++----+--------+----+--------+
+2 rows in set (0.00 sec)
+
+
+    SELECT * FROM TableA FULL OUTER JOIN TableB ON TableA.name = TableB.name;
+
+    (SELECT * FROM TableA LEFT JOIN TableB ON TableA.id=TableB.id)
+        UNION
+        (SELECT * FROM TableA RIGHT JOIN TableB ON TableA.id=TableB.id)
+
+
++------+-----------+------+-------------+
+| id   | name      | id   | name        |
++------+-----------+------+-------------+
+|    1 | Pirate    |    1 | Rutabaga    |
+|    2 | Monkey    |    2 | Pirate      |
+|    3 | Ninja     |    3 | Darth Vader |
+|    4 | Spaghetti |    4 | Ninja       |
++------+-----------+------+-------------+
+4 rows in set (0.12 sec)
+
+SELECT * FROM TableA LEFT OUTER JOIN TableB ON TableA.name = TableB.name;
+
++----+-----------+------+--------+
+| id | name      | id   | name   |
++----+-----------+------+--------+
+|  1 | Pirate    |    2 | Pirate |
+|  3 | Ninja     |    4 | Ninja  |
+|  2 | Monkey    | NULL | NULL   |
+|  4 | Spaghetti | NULL | NULL   |
++----+-----------+------+--------+
+4 rows in set (0.02 sec)
+
+
+SELECT * FROM TableA LEFT OUTER JOIN TableB ON TableA.name = TableB.name WHERE TableB.id IS null;
++----+-----------+------+------+
+| id | name      | id   | name |
++----+-----------+------+------+
+|  2 | Monkey    | NULL | NULL |
+|  4 | Spaghetti | NULL | NULL |
++----+-----------+------+------+
+2 rows in set (0.00 sec)
+
+
+SELECT * FROM TableA FULL OUTER JOIN TableB ON TableA.name = TableB.name WHERE TableA.id IS null OR TableB.id IS null;
+
++------+-----------+------+-------------+
+| id   | name      | id   | name        |
++------+-----------+------+-------------+
+|    2 | Monkey    | NULL | NULL        |
+|    4 | Spaghetti | NULL | NULL        |
+| NULL | NULL      |    1 | Rutabaga    |
+| NULL | NULL      |    3 | Darth Vader |
++------+-----------+------+-------------+
+4 rows in set (0.00 sec)
+
+
+
+SELECT * FROM TableA CROSS JOIN TableB;
+
++----+-----------+----+-------------+
+| id | name      | id | name        |
++----+-----------+----+-------------+
+|  1 | Pirate    |  1 | Rutabaga    |
+|  2 | Monkey    |  1 | Rutabaga    |
+|  3 | Ninja     |  1 | Rutabaga    |
+|  4 | Spaghetti |  1 | Rutabaga    |
+|  1 | Pirate    |  2 | Pirate      |
+|  2 | Monkey    |  2 | Pirate      |
+|  3 | Ninja     |  2 | Pirate      |
+|  4 | Spaghetti |  2 | Pirate      |
+|  1 | Pirate    |  3 | Darth Vader |
+|  2 | Monkey    |  3 | Darth Vader |
+|  3 | Ninja     |  3 | Darth Vader |
+|  4 | Spaghetti |  3 | Darth Vader |
+|  1 | Pirate    |  4 | Ninja       |
+|  2 | Monkey    |  4 | Ninja       |
+|  3 | Ninja     |  4 | Ninja       |
+|  4 | Spaghetti |  4 | Ninja       |
++----+-----------+----+-------------+
+16 rows in set (0.00 sec)
+
+
+
+
+
+
+-----WITH EXPLAIN--------------------------------------------------
+
+EXPLAIN SELECT * FROM TableA INNER JOIN TableB ON TableA.name = TableB.name;
++----+-------------+--------+------------+------+---------------+------+---------+------+------+----------+----------------------------------------------------+
+| id | select_type | table  | partitions | type | possible_keys | key  | key_len | ref  | rows | filtered | Extra                                              |
++----+-------------+--------+------------+------+---------------+------+---------+------+------+----------+----------------------------------------------------+
+|  1 | SIMPLE      | TableA | NULL       | ALL  | index_name    | NULL | NULL    | NULL |    4 |   100.00 | NULL                                               |
+|  1 | SIMPLE      | TableB | NULL       | ALL  | index_name    | NULL | NULL    | NULL |    4 |    25.00 | Using where; Using join buffer (Block Nested Loop) |
++----+-------------+--------+------------+------+---------------+------+---------+------+------+----------+----------------------------------------------------+
+2 rows in set, 1 warning (0.00 sec)
+
+
+EXPLAIN SELECT * FROM TableA FULL OUTER JOIN TableB ON TableA.name = TableB.name;
+
++----+--------------+------------+------------+------+---------------+------+---------+------+------+----------+----------------------------------------------------+
+| id | select_type  | table      | partitions | type | possible_keys | key  | key_len | ref  | rows | filtered | Extra                                              |
++----+--------------+------------+------------+------+---------------+------+---------+------+------+----------+----------------------------------------------------+
+|  1 | PRIMARY      | TableA     | NULL       | ALL  | NULL          | NULL | NULL    | NULL |    4 |   100.00 | NULL                                               |
+|  1 | PRIMARY      | TableB     | NULL       | ALL  | index_id      | NULL | NULL    | NULL |    4 |   100.00 | Using where; Using join buffer (Block Nested Loop) |
+|  2 | UNION        | TableB     | NULL       | ALL  | NULL          | NULL | NULL    | NULL |    4 |   100.00 | NULL                                               |
+|  2 | UNION        | TableA     | NULL       | ALL  | index_id      | NULL | NULL    | NULL |    4 |   100.00 | Using where; Using join buffer (Block Nested Loop) |
+| NULL | UNION RESULT | <union1,2> | NULL       | ALL  | NULL          | NULL | NULL    | NULL | NULL |     NULL | Using temporary                                    |
++----+--------------+------------+------------+------+---------------+------+---------+------+------+----------+----------------------------------------------------+
+5 rows in set, 1 warning (0.00 sec)
+
+
+EXPLAIN SELECT * FROM TableA LEFT OUTER JOIN TableB ON TableA.name = TableB.name;
+
++----+-------------+--------+------------+------+---------------+------+---------+------+------+----------+----------------------------------------------------+
+| id | select_type | table  | partitions | type | possible_keys | key  | key_len | ref  | rows | filtered | Extra                                              |
++----+-------------+--------+------------+------+---------------+------+---------+------+------+----------+----------------------------------------------------+
+|  1 | SIMPLE      | TableA | NULL       | ALL  | NULL          | NULL | NULL    | NULL |    4 |   100.00 | NULL                                               |
+|  1 | SIMPLE      | TableB | NULL       | ALL  | index_name    | NULL | NULL    | NULL |    4 |   100.00 | Using where; Using join buffer (Block Nested Loop) |
++----+-------------+--------+------------+------+---------------+------+---------+------+------+----------+----------------------------------------------------+
+2 rows in set, 1 warning (0.00 sec)
+
+
+EXPLAIN SELECT * FROM TableA LEFT OUTER JOIN TableB ON TableA.name = TableB.name WHERE TableB.id IS null;
+
++----+-------------+--------+------------+------+---------------+------+---------+------+------+----------+----------------------------------------------------------------+
+| id | select_type | table  | partitions | type | possible_keys | key  | key_len | ref  | rows | filtered | Extra                                                          |
++----+-------------+--------+------------+------+---------------+------+---------+------+------+----------+----------------------------------------------------------------+
+|  1 | SIMPLE      | TableA | NULL       | ALL  | NULL          | NULL | NULL    | NULL |    4 |   100.00 | NULL                                                           |
+|  1 | SIMPLE      | TableB | NULL       | ALL  | index_name    | NULL | NULL    | NULL |    4 |    25.00 | Using where; Not exists; Using join buffer (Block Nested Loop) |
++----+-------------+--------+------------+------+---------------+------+---------+------+------+----------+----------------------------------------------------------------+
+2 rows in set, 1 warning (0.00 sec)
+
+
+EXPLAIN SELECT * FROM TableA FULL OUTER JOIN TableB ON TableA.name = TableB.name WHERE TableA.id IS null OR TableB.id IS null;
+
++----+--------------+------------+------------+------+---------------+------+---------+------+------+----------+----------------------------------------------------------------+
+| id | select_type  | table      | partitions | type | possible_keys | key  | key_len | ref  | rows | filtered | Extra                                                          |
++----+--------------+------------+------------+------+---------------+------+---------+------+------+----------+----------------------------------------------------------------+
+|  1 | PRIMARY      | TableA     | NULL       | ALL  | NULL          | NULL | NULL    | NULL |    4 |   100.00 | NULL                                                           |
+|  1 | PRIMARY      | TableB     | NULL       | ALL  | index_name    | NULL | NULL    | NULL |    4 |    25.00 | Using where; Not exists; Using join buffer (Block Nested Loop) |
+|  2 | UNION        | TableB     | NULL       | ALL  | NULL          | NULL | NULL    | NULL |    4 |   100.00 | NULL                                                           |
+|  2 | UNION        | TableA     | NULL       | ALL  | index_name    | NULL | NULL    | NULL |    4 |    25.00 | Using where; Not exists; Using join buffer (Block Nested Loop) |
+| NULL | UNION RESULT | <union1,2> | NULL       | ALL  | NULL          | NULL | NULL    | NULL | NULL |     NULL | Using temporary                                                |
++----+--------------+------------+------------+------+---------------+------+---------+------+------+----------+----------------------------------------------------------------+
+5 rows in set, 1 warning (0.00 sec)
+
+
+EXPLAIN SELECT * FROM TableA CROSS JOIN TableB;
+
++----+-------------+--------+------------+------+---------------+------+---------+------+------+----------+---------------------------------------+
+| id | select_type | table  | partitions | type | possible_keys | key  | key_len | ref  | rows | filtered | Extra                                 |
++----+-------------+--------+------------+------+---------------+------+---------+------+------+----------+---------------------------------------+
+|  1 | SIMPLE      | TableA | NULL       | ALL  | NULL          | NULL | NULL    | NULL |    4 |   100.00 | NULL                                  |
+|  1 | SIMPLE      | TableB | NULL       | ALL  | NULL          | NULL | NULL    | NULL |    4 |   100.00 | Using join buffer (Block Nested Loop) |
++----+-------------+--------+------------+------+---------------+------+---------+------+------+----------+---------------------------------------+
+2 rows in set, 1 warning (0.00 sec)

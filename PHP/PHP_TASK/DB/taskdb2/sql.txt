@@ -1,0 +1,46 @@
+
+CREATE TABLE task2 (
+id INT NOT NULL,
+name VARCHAR(255) NOT NULL,
+description TEXT NOT NULL
+);
+
+CREATE TABLE first_table_task3 (
+id INT NOT NULL,
+name VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE second_table_task3 (
+id INT NOT NULL,
+name VARCHAR(255) NOT NULL
+);
+
+SELECT `id`, `name`, `description` FROM `task2` WHERE id=1;
+
+___________________ADD INDEXEX___________________________________
+ALTER TABLE `task2` ADD INDEX(`id`);
+ALTER TABLE `task2` ADD INDEX(`name`);
+ALTER TABLE `task2` ADD INDEX(`description`);
+
+
+ALTER TABLE table_name ADD INDEX index_name (table_column);
+ALTER TABLE table_name DROP INDEX index_name;
+SHOW INDEX FROM table_name \G
+________________________________________
+CREATE UNIQUE INDEX index_name
+ON table_name (column1, column2, ...);
+
+___________________________________________
+CREATE INDEX idx_lastname
+ON Persons (LastName);
+
+
+------------------------------------------------------
+Чтобы создать индекс в Mysql, необходимо выполнить запрос:
+
+CREATE INDEX index_name ON table(column1, column2, ...)
+Например создадим индекс по одной колонке:
+
+CREATE INDEX email ON users(email)
+# Колонка email в таблице users теперь проиндексирована
+

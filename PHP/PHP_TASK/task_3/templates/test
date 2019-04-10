@@ -1,0 +1,16 @@
+
+//        echo $this->file;
+//        $file = file("file.txt");
+//        $open = fopen("file.txt", "w");
+//
+//        for ($i = 0; $i < count($file); $i++) {
+//            if (($i + 1) != $numofline) {
+//                fwrite($open, $file[$i]);
+//            } else {
+//                fwrite($open, $newline . "\r\n");
+//            }
+//        }
+//
+//        fclose($open);
+//
+//    }

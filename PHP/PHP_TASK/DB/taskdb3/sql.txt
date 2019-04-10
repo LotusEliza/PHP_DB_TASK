@@ -1,0 +1,57 @@
+
+CREATE TABLE TableA (
+id INT NOT NULL,
+name VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE TableB (
+id INT NOT NULL,
+name VARCHAR(50) NOT NULL
+);
+
+ALTER TABLE first_table_task3
+RENAME TO TableA;
+
+ALTER TABLE second_table_task3
+RENAME TO TableB;
+
+
+INSERT INTO `TableA` (`id`, `name`) VALUES
+(1, 'Pirate'),
+(2, 'Monkey'),
+(3, 'Ninja'),
+(4, 'Spaghetti');
+
+INSERT INTO `TableB` (`id`, `name`) VALUES
+(1, 'Rutabaga'),
+(2, 'Pirate'),
+(3, 'Darth Vader'),
+(4, 'Ninja');
+
+INSERT INTO TableB (id, name)
+VALUES  (1, 'Rutabaga'),
+        (2, 'Pirate'),
+        (3, 'Darth Vader'),
+        (4, 'Ninja');
+
+INSERT INTO TableA (id, name)
+VALUES  (1, 'Pirate'),
+        (2, 'Monkey'),
+        (3, 'Ninja'),
+        (4, 'Spaghetti');
+
+
+
+MYSQL___________________________________
+ALTER TABLE TableA ADD INDEX index_name (name);
+ALTER TABLE TableA ADD INDEX index_id (id);
+
+ALTER TABLE TableB ADD INDEX index_id (id);
+ALTER TABLE TableB ADD INDEX index_name (name);
+
+POSTGRE____________________________
+CREATE INDEX ON TableA index_name (name);
+CREATE INDEX ON TableB index_id (id);
+
+CREATE INDEX ON TableA index_name (name);
+CREATE INDEX ON TableB index_id (id);
