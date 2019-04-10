@@ -48,6 +48,9 @@ protected $db;
         $stm = $this->db->prepare($this->query);
         var_dump($this->query);
         foreach ($this->values as $key => &$value){
+            echo $stm->bindParam(':'.$key, $value, PDO::PARAM_STR);
+        }
+        foreach ($this->where_v as $key => &$value){
             $stm->bindParam(':'.$key, $value, PDO::PARAM_STR);
         }
         $stm->execute();

@@ -13,7 +13,7 @@ class DB
     public static function getInstance() {
         if(empty(self::$instance)) {
             try {
-                $mysql = "mysql";
+                $mysql = "mysql"; //change DB type in config file
                 $pgsql = "pgsql";
                 if(DB == $mysql){
                     self::$instance = new PDO("mysql:host=".DB_HOST.';port='.DB_PORT.';dbname='.DB_NAME, DB_USER, DB_PASS);

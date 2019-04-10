@@ -6,14 +6,25 @@
  * Time: 11:39 AM
  */
 
-//------------CONNECT MySQL---------------
+//------------CONNECT MySQL HOME---------------
 define('DB_USER', 'phpmyadmin');
 define('DB_PASS', '12122');
 define('DB_NAME', 'user3');
 define('DB_HOST', 'localhost');
-//------------CONNECT PG---------------
+//------------CONNECT PG HOME---------------
 define('PG_USER', 'user3');
 define('PG_PASS', '12122');
+define('PG_NAME', 'user3');
+define('PG_HOST', 'localhost');
+
+//------------CONNECT MySQL CLASS---------------
+define('DB_USER', 'user3');
+define('DB_PASS', 'user3');
+define('DB_NAME', 'user3');
+define('DB_HOST', 'localhost');
+//------------CONNECT PG CLASS---------------
+define('PG_USER', 'user3');
+define('PG_PASS', 'user3');
 define('PG_NAME', 'user3');
 define('PG_HOST', 'localhost');
 

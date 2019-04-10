@@ -117,11 +117,9 @@ class Model
             $send=mail($to, $subject, $body, $headers);
             $confirm=mail($user, $usersubject, $userheaders,$usermessage );
             if($send && $confirm){
-                echo "Sucses";
                 $this->refresh();
             }
             else{
-                echo "Failed";
                 $this->refresh();
             }
         }

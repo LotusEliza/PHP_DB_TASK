@@ -133,20 +133,26 @@ class SQL
      public function f_join(){
          $fields_str = $this->table.".".$this->onfield;
          $fields_str2 = $this->table2.".".$this->onfield2;
+         $inner ="inner";
+         $left_outer ="left_outer";
+         $right_outer ="right_outer";
+         $cross = "cross";
+         $natural = "natural";
 
-         if($this->join == "inner"){
+
+         if($this->join == $inner){
              $this->query .= " INNER JOIN $this->table2 ON $fields_str=$fields_str2";
              return $this;
-         }elseif ($this->join == "left"){
-             $this->query .= " LEFT JOIN $this->table2 ON $fields_str=$fields_str2";
+         }elseif ($this->join ==  $left_outer){
+             $this->query .= " LEFT OUTER JOIN $this->table2 ON $fields_str=$fields_str2";
              return $this;
-         }elseif ($this->join == "right"){
-             $this->query .= " RIGHT JOIN $this->table2 ON $fields_str=$fields_str2";
+         }elseif ($this->join == $right_outer){
+             $this->query .= " RIGHT OUTER JOIN $this->table2 ON $fields_str=$fields_str2";
              return $this;
-         }elseif ($this->join == "cross"){
+         }elseif ($this->join == $cross){
              $this->query .= " CROSS JOIN $this->table2";
              return $this;
-         }elseif ($this->join == "natural"){
+         }elseif ($this->join == $natural){
              $this->query .= " NATURAL JOIN $this->table2";
              return $this;
          }else{

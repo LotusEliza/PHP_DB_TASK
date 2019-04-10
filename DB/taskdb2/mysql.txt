@@ -1,0 +1,27 @@
+
+-----------------------------WITHOUT indexes-------------------------------------
+
+1. SELECT id, name, description FROM task2 WHERE id=850000;
+
+2. SELECT id, name, description FROM task2 WHERE name= ;
+
+3. SELECT id, name, description FROM task2 WHERE description= ;
+___________________________________________________________________________
+
+4. EXPLAIN SELECT id, name, description FROM task2 WHERE id=850000;
+
+5. EXPLAIN SELECT id, name, description FROM task2 WHERE name= ;
+
+
+-----------------------------WITH indexes-------------------------------------
+
+1. SELECT id, name, description FROM task2 WHERE id=850000;
+
+2. SELECT id, name, description FROM task2 WHERE name= ;
+
+3. SELECT id, name, description FROM task2 WHERE description= ;
+___________________________________________________________________________
+
+4. EXPLAIN SELECT id, name, description FROM task2 WHERE id=850000;
+
+5. EXPLAIN SELECT id, name, description FROM task2 WHERE name= ;
