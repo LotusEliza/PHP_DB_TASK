@@ -32,8 +32,8 @@ define('PG_PORT', '5432');
 
 
 //--------------CHOOSE DB TO USE--------
-define('DB', 'pgsql');
-//define('DB', 'mysql');
+//define('DB', 'pgsql');
+define('DB', 'mysql');
 
 //----------ERROR CONNECT DB--------------
 define("ERROR_MYSQL", "DB Error, could not query the database\n MySQL Error: ");
@@ -47,6 +47,7 @@ define("ITEM_UPD", "Updated!");
 define("ERROR_UPD", "Error while updating!");
 define("ERROR_FLD", "Error can't set field to * or num!");
 define('ERROR_SEL', 'No such records!');
+define('ERROR_JOIN', 'No such join type!');
 
 
 
