@@ -1,0 +1,313 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 10.7 (Ubuntu 10.7-0ubuntu0.18.04.1)
+-- Dumped by pg_dump version 10.7 (Ubuntu 10.7-0ubuntu0.18.04.1)
+
+-- Started on 2019-04-11 14:26:33 EEST
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- TOC entry 4 (class 2615 OID 24578)
+-- Name: myuser3schema; Type: SCHEMA; Schema: -; Owner: postgres
+--
+
+CREATE SCHEMA myuser3schema;
+
+
+ALTER SCHEMA myuser3schema OWNER TO postgres;
+
+--
+-- TOC entry 1 (class 3079 OID 13041)
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- TOC entry 2942 (class 0 OID 0)
+-- Dependencies: 1
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- TOC entry 202 (class 1259 OID 32793)
+-- Name: customers; Type: TABLE; Schema: public; Owner: user3
+--
+
+CREATE TABLE public.customers (
+    customerid integer NOT NULL,
+    customername character varying(30) NOT NULL
+);
+
+
+ALTER TABLE public.customers OWNER TO user3;
+
+--
+-- TOC entry 201 (class 1259 OID 32791)
+-- Name: customers_customerid_seq; Type: SEQUENCE; Schema: public; Owner: user3
+--
+
+CREATE SEQUENCE public.customers_customerid_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.customers_customerid_seq OWNER TO user3;
+
+--
+-- TOC entry 2943 (class 0 OID 0)
+-- Dependencies: 201
+-- Name: customers_customerid_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: user3
+--
+
+ALTER SEQUENCE public.customers_customerid_seq OWNED BY public.customers.customerid;
+
+
+--
+-- TOC entry 200 (class 1259 OID 32783)
+-- Name: orders; Type: TABLE; Schema: public; Owner: user3
+--
+
+CREATE TABLE public.orders (
+    orderid integer NOT NULL,
+    customerid integer NOT NULL,
+    description character varying(30) NOT NULL
+);
+
+
+ALTER TABLE public.orders OWNER TO user3;
+
+--
+-- TOC entry 199 (class 1259 OID 32781)
+-- Name: orders_orderid_seq; Type: SEQUENCE; Schema: public; Owner: user3
+--
+
+CREATE SEQUENCE public.orders_orderid_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.orders_orderid_seq OWNER TO user3;
+
+--
+-- TOC entry 2944 (class 0 OID 0)
+-- Dependencies: 199
+-- Name: orders_orderid_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: user3
+--
+
+ALTER SEQUENCE public.orders_orderid_seq OWNED BY public.orders.orderid;
+
+
+--
+-- TOC entry 198 (class 1259 OID 24581)
+-- Name: user3; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.user3 (
+    id integer NOT NULL,
+    name character varying(30) NOT NULL,
+    city character varying(30) NOT NULL,
+    age integer
+);
+
+
+ALTER TABLE public.user3 OWNER TO postgres;
+
+--
+-- TOC entry 197 (class 1259 OID 24579)
+-- Name: user3_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.user3_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.user3_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2945 (class 0 OID 0)
+-- Dependencies: 197
+-- Name: user3_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.user3_id_seq OWNED BY public.user3.id;
+
+
+--
+-- TOC entry 2801 (class 2604 OID 32796)
+-- Name: customers customerid; Type: DEFAULT; Schema: public; Owner: user3
+--
+
+ALTER TABLE ONLY public.customers ALTER COLUMN customerid SET DEFAULT nextval('public.customers_customerid_seq'::regclass);
+
+
+--
+-- TOC entry 2800 (class 2604 OID 32786)
+-- Name: orders orderid; Type: DEFAULT; Schema: public; Owner: user3
+--
+
+ALTER TABLE ONLY public.orders ALTER COLUMN orderid SET DEFAULT nextval('public.orders_orderid_seq'::regclass);
+
+
+--
+-- TOC entry 2799 (class 2604 OID 24584)
+-- Name: user3 id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.user3 ALTER COLUMN id SET DEFAULT nextval('public.user3_id_seq'::regclass);
+
+
+--
+-- TOC entry 2934 (class 0 OID 32793)
+-- Dependencies: 202
+-- Data for Name: customers; Type: TABLE DATA; Schema: public; Owner: user3
+--
+
+COPY public.customers (customerid, customername) FROM stdin;
+1	Anna
+2	Liza
+3	Max
+4	Lily
+\.
+
+
+--
+-- TOC entry 2932 (class 0 OID 32783)
+-- Dependencies: 200
+-- Data for Name: orders; Type: TABLE DATA; Schema: public; Owner: user3
+--
+
+COPY public.orders (orderid, customerid, description) FROM stdin;
+1	1	book
+2	2	car
+5	1	ball
+6	1	dog
+16	2	'dog'
+17	2	'dog'
+18	2	'dog'
+19	2	'dog'
+20	2	'ball'
+\.
+
+
+--
+-- TOC entry 2930 (class 0 OID 24581)
+-- Dependencies: 198
+-- Data for Name: user3; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.user3 (id, name, city, age) FROM stdin;
+4	Nency	California	45
+1	Max	Niko	29
+6	Maya	Niko	29
+82	Max	Niko	29
+83	Max	Niko	29
+84	Max	Niko	29
+85	Max	Niko	29
+86	Max	Niko	29
+87	Max	Niko	29
+88	Max	Niko	29
+89	Max	Niko	29
+90	Max	Niko	29
+91	Max	Niko	29
+92	Max	Niko	29
+93	Max	Niko	29
+94	Max	Niko	29
+95	Max	Niko	29
+96	Max	Niko	29
+97	Max	Niko	29
+\.
+
+
+--
+-- TOC entry 2946 (class 0 OID 0)
+-- Dependencies: 201
+-- Name: customers_customerid_seq; Type: SEQUENCE SET; Schema: public; Owner: user3
+--
+
+SELECT pg_catalog.setval('public.customers_customerid_seq', 4, true);
+
+
+--
+-- TOC entry 2947 (class 0 OID 0)
+-- Dependencies: 199
+-- Name: orders_orderid_seq; Type: SEQUENCE SET; Schema: public; Owner: user3
+--
+
+SELECT pg_catalog.setval('public.orders_orderid_seq', 20, true);
+
+
+--
+-- TOC entry 2948 (class 0 OID 0)
+-- Dependencies: 197
+-- Name: user3_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.user3_id_seq', 152, true);
+
+
+--
+-- TOC entry 2807 (class 2606 OID 32798)
+-- Name: customers customers_pkey; Type: CONSTRAINT; Schema: public; Owner: user3
+--
+
+ALTER TABLE ONLY public.customers
+    ADD CONSTRAINT customers_pkey PRIMARY KEY (customerid);
+
+
+--
+-- TOC entry 2805 (class 2606 OID 32788)
+-- Name: orders orders_pkey; Type: CONSTRAINT; Schema: public; Owner: user3
+--
+
+ALTER TABLE ONLY public.orders
+    ADD CONSTRAINT orders_pkey PRIMARY KEY (orderid);
+
+
+--
+-- TOC entry 2803 (class 2606 OID 24586)
+-- Name: user3 user3_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.user3
+    ADD CONSTRAINT user3_pkey PRIMARY KEY (id);
+
+
+-- Completed on 2019-04-11 14:26:34 EEST
+
+--
+-- PostgreSQL database dump complete
+--
+
