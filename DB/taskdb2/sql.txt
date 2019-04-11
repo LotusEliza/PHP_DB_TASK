@@ -28,9 +28,16 @@ ON Persons (LastName);
 ------------------------------------------------------
 Чтобы создать индекс в Mysql, необходимо выполнить запрос:
 
-CREATE INDEX index_name ON table(column1, column2, ...)
+CREATE INDEX index_name ON task2(column1, column2, ...)
 Например создадим индекс по одной колонке:
 
-CREATE INDEX email ON users(email)
+CREATE INDEX desc ON task2(description)
 # Колонка email в таблице users теперь проиндексирована
 
+ALTER TABLE task2 ADD INDEX index_name (name);
+ALTER TABLE task2 ADD INDEX index_id (id);
+ALTER TABLE task2 ADD INDEX index_desc (description);
+
+CREATE INDEX index_txt ON description ( bar(500) );
+
+ ALTER TABLE task2 ADD FULLTEXT (description);

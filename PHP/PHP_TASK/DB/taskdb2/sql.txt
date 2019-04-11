@@ -15,7 +15,8 @@ id INT NOT NULL,
 name VARCHAR(255) NOT NULL
 );
 
-SELECT `id`, `name`, `description` FROM `task2` WHERE id=1;
+SELECT `id`, `name`, `description` FROM `task2` WHERE id=850000;
+SELECT `id` FROM `task2` WHERE id=850000;
 
 ___________________ADD INDEXEX___________________________________
 ALTER TABLE `task2` ADD INDEX(`id`);
