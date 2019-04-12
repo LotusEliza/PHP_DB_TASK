@@ -1,5 +1,5 @@
 <?php
-include 'Helper.php';
+include 'libs/Helper.php';
 
 //сделать класс Html Helper реализующий select-multi, table, ul-ol, dl-dt-dd, radiobuttons-group, checkboxes
 

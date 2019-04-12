@@ -6,17 +6,18 @@
  * Time: 11:39 AM
  */
 
-//------------CONNECT MySQL HOME---------------
-define('DB_USER', 'phpmyadmin');
-define('DB_PASS', '12122');
-define('DB_NAME', 'test');
-define('DB_HOST', 'localhost');
-
+////------------CONNECT MySQL HOME---------------
+//define('DB_USER', 'phpmyadmin');
+//define('DB_PASS', '12122');
+//define('DB_NAME', 'test');
+//define('DB_HOST', 'localhost');
+//
 //------------CONNECT MySQL CLASS---------------
 define('DB_USER', 'user3');
 define('DB_PASS', 'user3');
 define('DB_NAME', 'user3');
 define('DB_HOST', 'localhost');
+
 
 define("INI_FILE", "file.ini");
 define("INI_ADD", "Value is added: ");

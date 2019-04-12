@@ -2,11 +2,11 @@
 
     session_start();
     include 'config.php';
-    include 'Session.php';
-    include 'Cookie.php';
-    include 'Json.php';
-    include 'Mysql.php';
-    include 'Ini.php';
+    include 'libs/Session.php';
+    include 'libs/Cookie.php';
+    include 'libs/Json.php';
+    include 'libs/Mysql.php';
+    include 'libs/Ini.php';
 
     function add(iWorkData $obj){
         $key="name";

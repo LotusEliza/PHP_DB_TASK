@@ -13,7 +13,7 @@ class Postgresql extends SQL implements iData
 
     function __construct()
     {
-        $this->link = pg_connect("host=localhost port=5432 dbname=user3 user=user3 password=12122")
+        $this->link = pg_connect("host=localhost port=5432 dbname=user3 user=user3 password=-Uuser3")
         or die('connection failed');
     }
 
