@@ -2,7 +2,6 @@
 
 class SQL
 {
-
     protected $values=[];
     protected $values2=[];
     protected $upvalues=[];
@@ -22,63 +21,63 @@ class SQL
     protected $having=[];
     protected $keys;
 
-    public function __set_table($table){
+    public function set_table($table){
         $this->table = $table;
     }
 
-    public function __set_table2($table2){
+    public function set_table2($table2){
         $this->table2 = $table2;
     }
 
-    public function __set_field($field){
+    public function set_field($field){
         array_push($this->fields,"$field");
     }
 
-    public function __set_field2($field2){
+    public function set_field2($field2){
         array_push($this->fields2,"$field2");
     }
 
-    public function __set_onfield($onfield){
+    public function set_onfield($onfield){
         $this->onfield = $onfield;
     }
 
-    public function __set_onfield2($onfield2){
+    public function set_onfield2($onfield2){
         $this->onfield2 = $onfield2;
     }
 
-    public function __set_order($order){
+    public function set_order($order){
         $this->order = $order;
     }
 
-    public function __set_group($group){
+    public function set_group($group){
         $this->group = $group;
     }
 
-    public function __set_having($having){
+    public function set_having($having){
         $this->having = $having;
     }
 
-    public function __set_value($value){
+    public function set_value($value){
         array_push($this->values,"$value");
     }
 
-    public function __set_value2($value2){
+    public function set_value2($value2){
         array_push($this->values2,"$value2");
     }
 
-    public function __set_upvalue($value){
+    public function set_upvalue($value){
         array_push($this->upvalues,"$value");
     }
 
-    public function __set_join($type){
+    public function set_join($type){
         $this->join = $type;
     }
 
-    public function __set_where_f($field){
+    public function set_where_f($field){
         array_push($this->where_f,"$field");
     }
 
-    public function __set_where_v($value){
+    public function set_where_v($value){
         array_push($this->where_v,"$value");
     }
 
@@ -107,7 +106,6 @@ class SQL
          $right_outer ="right_outer";
          $cross = "cross";
          $natural = "natural";
-
 
          if($this->join == $inner){
              $this->query .= " INNER JOIN $this->table2 ON $fields_str=$fields_str2";
@@ -213,6 +211,3 @@ class SQL
     }
 
 }
-
-
-

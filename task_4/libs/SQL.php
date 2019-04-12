@@ -16,7 +16,7 @@ class SQL
     protected $limit;
     protected $query;
 
-    public function __set_field($field){
+    public function set_field($field){
         if(is_numeric($field) || $field == "*"){
            echo ERROR_FLD;
         }else{
@@ -25,21 +25,21 @@ class SQL
         }
     }
 
-    public function __set_table($table){
+    public function set_table($table){
         $this->table = trim($table);
     }
 
-    public function __set_value($values){
+    public function set_value($values){
         $values = trim($values);
         array_push($this->values,"$values");
     }
 
-    public function __set_where($where){
+    public function set_where($where){
         $where = trim($where);
         array_push($this->where,"$where");
     }
 
-    public function __set_limit($limit){
+    public function set_limit($limit){
         $limit = trim($limit);
         $this->limit = $limit;
     }

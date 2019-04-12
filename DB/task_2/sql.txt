@@ -21,10 +21,9 @@ name VARCHAR(250) NOT NULL,
 description TEXT NOT NULL
 );
 
-CREATE INDEX idx_name ON task2(name);
-CREATE INDEX idx_id ON task2(id);
-CREATE INDEX idx_description ON task2(description);
+SELECT * FROM task2 WHERE id= 850000;
 
+CREATE INDEX ON task2(name);
 
 
 

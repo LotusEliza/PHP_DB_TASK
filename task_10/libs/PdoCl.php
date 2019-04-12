@@ -11,7 +11,6 @@ protected $con;
     }
 
     public function exec_select(){
-
         $stm = $this->con->prepare($this->query);
         var_dump($this->query);
         $stm->execute();

@@ -44,11 +44,7 @@
     }
 
     public function random_string($length) {
-        $chars = "Loremipsumdolorsitamet,consecteturadipiscingelit,
-                  seddoeiusmodtemporincididuntutlaboreetdoloremagnaaliqua.
-                  Utenimadminimveniam,quisnostrudexercitationullamcolaborisn
-                  isiutaliquipexeacommodoconsequat.Duisauteiruredolorinrepreh
-                  enderitinvodolorinreprehenda";
+        $chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyzdssdfgdsghegh";
         $name = substr( str_shuffle( $chars ), 0, $length );
         return $name;
      }
