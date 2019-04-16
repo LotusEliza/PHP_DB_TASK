@@ -17,8 +17,8 @@
 
      function __construct()
      {
-         $this->link = pg_connect("host=localhost port=5432 dbname=user3 user=user3 password=-Uuser3")
-         or die('connection failed');
+        $this->link = pg_connect("host=localhost port=5432 dbname=user3 user=user3 password=user3")
+        or die('connection failed');
      }
 
 
@@ -35,7 +35,7 @@
      }
 
      public function random_string($length) {
-         $chars = "";
+         $chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyzdssdfgdsghegh";
          $name = substr( str_shuffle( $chars ), 0, $length );
          return $name;
      }

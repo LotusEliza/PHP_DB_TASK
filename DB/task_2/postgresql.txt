@@ -1,11 +1,160 @@
 ------------------------------PG-------------------------------------
 -----------------------------WITHOUT indexes-------------------------------------
 
-1. SELECT * FROM task2 WHERE id=850000;
-2. SELECT * FROM task2 WHERE name='';
-3. SELECT * FROM task2 WHERE description='';
+1. SELECT id, name, description FROM task2 WHERE id=850000;
+
+   id   |                                                                                                                            name
+                                                                                                        |
+    description
+
+ 850000 | dh4jwD1bLMPCfitHAvdpkH9B9sfP37m8zo7hNXbA07nGKTwHCNUjRgtUZVb4Bz4yzuy9JgSOryIeVxgIsXQL5WVDFFfdk2cmIKYq1xZcGrFwpfRq35yPU32dhspmOT10RfvugEedEqcL8Als5gT
+BQeHPJs0Z2D94LYADzNuNraF686iYKuCYljh6csrMsn1MKSMkqaooiibe2tS6gS5oRGldgBG0xejh3wJOEQWT7tvnXECUOxhWkXZJIa | dh4jwD1bLMPCfitHAvdpkH9B9sfP37m8zo7hNXbA07nGKTwHCNU
+jRgtUZVb4Bz4yzuy9JgSOryIeVxgIsXQL5WVDFFfdk2cmIKYq1xZcGrFwpfRq35yPU32dhspmOT10RfvugEedEqcL8Als5gTBQeHPJs0Z2D94LYADzNuNraF686iYKuCYljh6csrMsn1MKSMkqaooiibe2tS6
+gS5oRGldgBG0xejh3wJOEQWT7tvnXECUOxhWkXZJIadh4jwD1bLMPCfitHAvdpkH9B9sfP37m8zo7hNXbA07nGKTwHCNUjRgtUZVb4Bz4yzuy9JgSOryIeVxgIsXQL5WVDFFfdk2cmIKYq1xZcGrFwpfRq35y
+PU32dhspmOT10RfvugEedEqcL8Als5gTBQeHPJs0Z2D94LYADzNuNraF686iYKuCYljh6csrMsn1MKSMkqaooiibe2tS6gS5oRGldgBG0xejh3wJOEQWT7tvnXECUOxhWkXZJIadh4jwD1bLMPCfitHAvdpkH
+9B9sfP37m8zo7hNXbA07nGKTwHCNUjRgtUZVb4Bz4yzuy9JgSOryIeVxgIsXQL5WVDFFfdk2cmIKYq1xZcGrFwpfRq35yPU32dhspmOT10RfvugEedEqcL8Als5gTBQeHPJs0Z2D94LYADzNuNraF686iYKuC
+Yljh6csrMsn1MKSMkqaooiibe2tS6gS5oRGldgBG0xejh3wJOEQWT7tvnXECUOxhWkXZJIa
+(1 row)
+
+
+
+ QUERY PLAN
+-------------------------------------------------------------
+ Seq Scan on task2  (cost=0.00..139822.33 rows=1 width=1012)
+   Filter: (id = 850000)
+(2 rows)
+
+
+2. SELECT id, name, description FROM task2 WHERE name='dh4jwD1bLMPCfitHAvdpkH9B9sfP37m8zo7hNXbA07nGKTwHCNUjRgtUZVb4Bz4yzuy9JgSOryIeVxgIsXQL5WVDFFfdk2cmIKYq1xZcGrFwpfRq35yPU32dhspmOT10RfvugEedEqcL8Als5gTBQeHPJs0Z2D94LYADzNuNraF686iYKuCYljh6csrMsn1MKSMkqaooiibe2tS6gS5oRGldgBG0xejh3wJOEQWT7tvnXECUOxhWkXZJIa';
+
+ id   |                                                                                                                            name
+                                                                                                        |
+    description
+
+ 850000 | dh4jwD1bLMPCfitHAvdpkH9B9sfP37m8zo7hNXbA07nGKTwHCNUjRgtUZVb4Bz4yzuy9JgSOryIeVxgIsXQL5WVDFFfdk2cmIKYq1xZcGrFwpfRq35yPU32dhspmOT10RfvugEedEqcL8Als5gT
+BQeHPJs0Z2D94LYADzNuNraF686iYKuCYljh6csrMsn1MKSMkqaooiibe2tS6gS5oRGldgBG0xejh3wJOEQWT7tvnXECUOxhWkXZJIa | dh4jwD1bLMPCfitHAvdpkH9B9sfP37m8zo7hNXbA07nGKTwHCNU
+jRgtUZVb4Bz4yzuy9JgSOryIeVxgIsXQL5WVDFFfdk2cmIKYq1xZcGrFwpfRq35yPU32dhspmOT10RfvugEedEqcL8Als5gTBQeHPJs0Z2D94LYADzNuNraF686iYKuCYljh6csrMsn1MKSMkqaooiibe2tS6
+gS5oRGldgBG0xejh3wJOEQWT7tvnXECUOxhWkXZJIadh4jwD1bLMPCfitHAvdpkH9B9sfP37m8zo7hNXbA07nGKTwHCNUjRgtUZVb4Bz4yzuy9JgSOryIeVxgIsXQL5WVDFFfdk2cmIKYq1xZcGrFwpfRq35y
+PU32dhspmOT10RfvugEedEqcL8Als5gTBQeHPJs0Z2D94LYADzNuNraF686iYKuCYljh6csrMsn1MKSMkqaooiibe2tS6gS5oRGldgBG0xejh3wJOEQWT7tvnXECUOxhWkXZJIadh4jwD1bLMPCfitHAvdpkH
+9B9sfP37m8zo7hNXbA07nGKTwHCNUjRgtUZVb4Bz4yzuy9JgSOryIeVxgIsXQL5WVDFFfdk2cmIKYq1xZcGrFwpfRq35yPU32dhspmOT10RfvugEedEqcL8Als5gTBQeHPJs0Z2D94LYADzNuNraF686iYKuC
+Yljh6csrMsn1MKSMkqaooiibe2tS6gS5oRGldgBG0xejh3wJOEQWT7tvnXECUOxhWkXZJIa
+(1 row)
+
+
+ QUERY PLAN
+-------------------------------------------------------------------------------------------------------------------------------------------------------------
+ Seq Scan on task2  (cost=0.00..139822.33 rows=1 width=1012)
+   Filter: ((name)::text = 'dh4jwD1bLMPCfitHAvdpkH9B9sfP37m8zo7hNXbA07nGKTwHCNUjRgtUZVb4Bz4yzuy9JgSOryIeVxgIsXQL5WVDFFfdk2cmIKYq1xZcGrFwpfRq35yPU32dhspmOT10R
+fvugEedEqcL8Als5gTBQeHPJs0Z2D94LYADzNuNraF686iYKuCYljh6csrMsn1MKSMkqaooiibe2tS6gS5oRGldgBG0xejh3wJOEQWT7tvnXECUOxhWkXZJIa'::text)
+(2 rows)
+
+
+3. SELECT id, name, description FROM task2 WHERE description='dh4jwD1bLMPCfitHAvdpkH9B9sfP37m8zo7hNXbA07nGKTwHCNUjRgtUZVb4Bz4yzuy9JgSOryIeVxgIsXQL5WVDFFfdk2cmIKYq1xZcGrFwpfRq35yPU32dhspmOT10RfvugEedEqcL8Als5gTBQeHPJs0Z2D94LYADzNuNraF686iYKuCYljh6csrMsn1MKSMkqaooiibe2tS6gS5oRGldgBG0xejh3wJOEQWT7tvnXECUOxhWkXZJIadh4jwD1bLMPCfitHAvdpkH9B9sfP37m8zo7hNXbA07nGKTwHCNUjRgtUZVb4Bz4yzuy9JgSOryIeVxgIsXQL5WVDFFfdk2cmIKYq1xZcGrFwpfRq35yPU32dhspmOT10RfvugEedEqcL8Als5gTBQeHPJs0Z2D94LYADzNuNraF686iYKuCYljh6csrMsn1MKSMkqaooiibe2tS6gS5oRGldgBG0xejh3wJOEQWT7tvnXECUOxhWkXZJIadh4jwD1bLMPCfitHAvdpkH9B9sfP37m8zo7hNXbA07nGKTwHCNUjRgtUZVb4Bz4yzuy9JgSOryIeVxgIsXQL5WVDFFfdk2cmIKYq1xZcGrFwpfRq35yPU32dhspmOT10RfvugEedEqcL8Als5gTBQeHPJs0Z2D94LYADzNuNraF686iYKuCYljh6csrMsn1MKSMkqaooiibe2tS6gS5oRGldgBG0xejh3wJOEQWT7tvnXECUOxhWkXZJIa';
+
+ id   |                                                                                                                            name
+                                                                                                        |
+    description
+----------------------------------------------------------------------
+ 850000 | dh4jwD1bLMPCfitHAvdpkH9B9sfP37m8zo7hNXbA07nGKTwHCNUjRgtUZVb4Bz4yzuy9JgSOryIeVxgIsXQL5WVDFFfdk2cmIKYq1xZcGrFwpfRq35yPU32dhspmOT10RfvugEedEqcL8Als5gT
+BQeHPJs0Z2D94LYADzNuNraF686iYKuCYljh6csrMsn1MKSMkqaooiibe2tS6gS5oRGldgBG0xejh3wJOEQWT7tvnXECUOxhWkXZJIa | dh4jwD1bLMPCfitHAvdpkH9B9sfP37m8zo7hNXbA07nGKTwHCNU
+jRgtUZVb4Bz4yzuy9JgSOryIeVxgIsXQL5WVDFFfdk2cmIKYq1xZcGrFwpfRq35yPU32dhspmOT10RfvugEedEqcL8Als5gTBQeHPJs0Z2D94LYADzNuNraF686iYKuCYljh6csrMsn1MKSMkqaooiibe2tS6
+gS5oRGldgBG0xejh3wJOEQWT7tvnXECUOxhWkXZJIadh4jwD1bLMPCfitHAvdpkH9B9sfP37m8zo7hNXbA07nGKTwHCNUjRgtUZVb4Bz4yzuy9JgSOryIeVxgIsXQL5WVDFFfdk2cmIKYq1xZcGrFwpfRq35y
+PU32dhspmOT10RfvugEedEqcL8Als5gTBQeHPJs0Z2D94LYADzNuNraF686iYKuCYljh6csrMsn1MKSMkqaooiibe2tS6gS5oRGldgBG0xejh3wJOEQWT7tvnXECUOxhWkXZJIadh4jwD1bLMPCfitHAvdpkH
+9B9sfP37m8zo7hNXbA07nGKTwHCNUjRgtUZVb4Bz4yzuy9JgSOryIeVxgIsXQL5WVDFFfdk2cmIKYq1xZcGrFwpfRq35yPU32dhspmOT10RfvugEedEqcL8Als5gTBQeHPJs0Z2D94LYADzNuNraF686iYKuC
+Yljh6csrMsn1MKSMkqaooiibe2tS6gS5oRGldgBG0xejh3wJOEQWT7tvnXECUOxhWkXZJIa
+(1 row)
+
+
+               QUERY PLAN
+
+ Seq Scan on task2  (cost=0.00..139822.33 rows=1 width=1012)
+   Filter: (description = 'dh4jwD1bLMPCfitHAvdpkH9B9sfP37m8zo7hNXbA07nGKTwHCNUjRgtUZVb4Bz4yzuy9JgSOryIeVxgIsXQL5WVDFFfdk2cmIKYq1xZcGrFwpfRq35yPU32dhspmOT10Rf
+vugEedEqcL8Als5gTBQeHPJs0Z2D94LYADzNuNraF686iYKuCYljh6csrMsn1MKSMkqaooiibe2tS6gS5oRGldgBG0xejh3wJOEQWT7tvnXECUOxhWkXZJIadh4jwD1bLMPCfitHAvdpkH9B9sfP37m8zo7hN
+XbA07nGKTwHCNUjRgtUZVb4Bz4yzuy9JgSOryIeVxgIsXQL5WVDFFfdk2cmIKYq1xZcGrFwpfRq35yPU32dhspmOT10RfvugEedEqcL8Als5gTBQeHPJs0Z2D94LYADzNuNraF686iYKuCYljh6csrMsn1MKS
+Mkqaooiibe2tS6gS5oRGldgBG0xejh3wJOEQWT7tvnXECUOxhWkXZJIadh4jwD1bLMPCfitHAvdpkH9B9sfP37m8zo7hNXbA07nGKTwHCNUjRgtUZVb4Bz4yzuy9JgSOryIeVxgIsXQL5WVDFFfdk2cmIKYq1
+xZcGrFwpfRq35yPU32dhspmOT10RfvugEedEqcL8Als5gTBQeHPJs0Z2D94LYADzNuNraF686iYKuCYljh6csrMsn1MKSMkqaooiibe2tS6gS5oRGldgBG0xejh3wJOEQWT7tvnXECUOxhWkXZJIa'::text)
+(2 rows)
+
 
 
 -----------------------------WITH indexes-------------------------------------
+SELECT id, name, description FROM task2 WHERE id=850000;
+
+ id   |                                                                                                                            name
+                                                                                                        |
+    description
+
+ 850000 | dh4jwD1bLMPCfitHAvdpkH9B9sfP37m8zo7hNXbA07nGKTwHCNUjRgtUZVb4Bz4yzuy9JgSOryIeVxgIsXQL5WVDFFfdk2cmIKYq1xZcGrFwpfRq35yPU32dhspmOT10RfvugEedEqcL8Als5gT
+BQeHPJs0Z2D94LYADzNuNraF686iYKuCYljh6csrMsn1MKSMkqaooiibe2tS6gS5oRGldgBG0xejh3wJOEQWT7tvnXECUOxhWkXZJIa | dh4jwD1bLMPCfitHAvdpkH9B9sfP37m8zo7hNXbA07nGKTwHCNU
+jRgtUZVb4Bz4yzuy9JgSOryIeVxgIsXQL5WVDFFfdk2cmIKYq1xZcGrFwpfRq35yPU32dhspmOT10RfvugEedEqcL8Als5gTBQeHPJs0Z2D94LYADzNuNraF686iYKuCYljh6csrMsn1MKSMkqaooiibe2tS6
+gS5oRGldgBG0xejh3wJOEQWT7tvnXECUOxhWkXZJIadh4jwD1bLMPCfitHAvdpkH9B9sfP37m8zo7hNXbA07nGKTwHCNUjRgtUZVb4Bz4yzuy9JgSOryIeVxgIsXQL5WVDFFfdk2cmIKYq1xZcGrFwpfRq35y
+PU32dhspmOT10RfvugEedEqcL8Als5gTBQeHPJs0Z2D94LYADzNuNraF686iYKuCYljh6csrMsn1MKSMkqaooiibe2tS6gS5oRGldgBG0xejh3wJOEQWT7tvnXECUOxhWkXZJIadh4jwD1bLMPCfitHAvdpkH
+9B9sfP37m8zo7hNXbA07nGKTwHCNUjRgtUZVb4Bz4yzuy9JgSOryIeVxgIsXQL5WVDFFfdk2cmIKYq1xZcGrFwpfRq35yPU32dhspmOT10RfvugEedEqcL8Als5gTBQeHPJs0Z2D94LYADzNuNraF686iYKuC
+Yljh6csrMsn1MKSMkqaooiibe2tS6gS5oRGldgBG0xejh3wJOEQWT7tvnXECUOxhWkXZJIa
+(1 row)
+
+ QUERY PLAN
+-----------------------------------------------------------------------------
+ Index Scan using task2_id_idx on task2  (cost=0.42..8.44 rows=1 width=1012)
+   Index Cond: (id = 850000)
+(2 rows)
+
+
+
+SELECT id, name, description FROM task2 WHERE name='dh4jwD1bLMPCfitHAvdpkH9B9sfP37m8zo7hNXbA07nGKTwHCNUjRgtUZVb4Bz4yzuy9JgSOryIeVxgIsXQL5WVDFFfdk2cmIKYq1xZcGrFwpfRq35yPU32dhspmOT10RfvugEedEqcL8Als5gTBQeHPJs0Z2D94LYADzNuNraF686iYKuCYljh6csrMsn1MKSMkqaooiibe2tS6gS5oRGldgBG0xejh3wJOEQWT7tvnXECUOxhWkXZJIa';
+
+ id   |                                                                                                                            name
+                                                                                                        |
+    description
+------------------------------------------------------------------------
+ 850000 | dh4jwD1bLMPCfitHAvdpkH9B9sfP37m8zo7hNXbA07nGKTwHCNUjRgtUZVb4Bz4yzuy9JgSOryIeVxgIsXQL5WVDFFfdk2cmIKYq1xZcGrFwpfRq35yPU32dhspmOT10RfvugEedEqcL8Als5gT
+BQeHPJs0Z2D94LYADzNuNraF686iYKuCYljh6csrMsn1MKSMkqaooiibe2tS6gS5oRGldgBG0xejh3wJOEQWT7tvnXECUOxhWkXZJIa | dh4jwD1bLMPCfitHAvdpkH9B9sfP37m8zo7hNXbA07nGKTwHCNU
+jRgtUZVb4Bz4yzuy9JgSOryIeVxgIsXQL5WVDFFfdk2cmIKYq1xZcGrFwpfRq35yPU32dhspmOT10RfvugEedEqcL8Als5gTBQeHPJs0Z2D94LYADzNuNraF686iYKuCYljh6csrMsn1MKSMkqaooiibe2tS6
+gS5oRGldgBG0xejh3wJOEQWT7tvnXECUOxhWkXZJIadh4jwD1bLMPCfitHAvdpkH9B9sfP37m8zo7hNXbA07nGKTwHCNUjRgtUZVb4Bz4yzuy9JgSOryIeVxgIsXQL5WVDFFfdk2cmIKYq1xZcGrFwpfRq35y
+PU32dhspmOT10RfvugEedEqcL8Als5gTBQeHPJs0Z2D94LYADzNuNraF686iYKuCYljh6csrMsn1MKSMkqaooiibe2tS6gS5oRGldgBG0xejh3wJOEQWT7tvnXECUOxhWkXZJIadh4jwD1bLMPCfitHAvdpkH
+9B9sfP37m8zo7hNXbA07nGKTwHCNUjRgtUZVb4Bz4yzuy9JgSOryIeVxgIsXQL5WVDFFfdk2cmIKYq1xZcGrFwpfRq35yPU32dhspmOT10RfvugEedEqcL8Als5gTBQeHPJs0Z2D94LYADzNuNraF686iYKuC
+Yljh6csrMsn1MKSMkqaooiibe2tS6gS5oRGldgBG0xejh3wJOEQWT7tvnXECUOxhWkXZJIa
+(1 row)
+
+        QUERY PLAN
+-------------------------------------------------------------------------------------------------------------------------------------------------------------
+ Index Scan using task2_name_idx on task2  (cost=0.68..8.69 rows=1 width=1012)
+   Index Cond: ((name)::text = 'dh4jwD1bLMPCfitHAvdpkH9B9sfP37m8zo7hNXbA07nGKTwHCNUjRgtUZVb4Bz4yzuy9JgSOryIeVxgIsXQL5WVDFFfdk2cmIKYq1xZcGrFwpfRq35yPU32dhspmO
+T10RfvugEedEqcL8Als5gTBQeHPJs0Z2D94LYADzNuNraF686iYKuCYljh6csrMsn1MKSMkqaooiibe2tS6gS5oRGldgBG0xejh3wJOEQWT7tvnXECUOxhWkXZJIa'::text)
+(2 rows)
+
+
+SELECT id, name, description FROM task2 WHERE description='dh4jwD1bLMPCfitHAvdpkH9B9sfP37m8zo7hNXbA07nGKTwHCNUjRgtUZVb4Bz4yzuy9JgSOryIeVxgIsXQL5WVDFFfdk2cmIKYq1xZcGrFwpfRq35yPU32dhspmOT10RfvugEedEqcL8Als5gTBQeHPJs0Z2D94LYADzNuNraF686iYKuCYljh6csrMsn1MKSMkqaooiibe2tS6gS5oRGldgBG0xejh3wJOEQWT7tvnXECUOxhWkXZJIadh4jwD1bLMPCfitHAvdpkH9B9sfP37m8zo7hNXbA07nGKTwHCNUjRgtUZVb4Bz4yzuy9JgSOryIeVxgIsXQL5WVDFFfdk2cmIKYq1xZcGrFwpfRq35yPU32dhspmOT10RfvugEedEqcL8Als5gTBQeHPJs0Z2D94LYADzNuNraF686iYKuCYljh6csrMsn1MKSMkqaooiibe2tS6gS5oRGldgBG0xejh3wJOEQWT7tvnXECUOxhWkXZJIadh4jwD1bLMPCfitHAvdpkH9B9sfP37m8zo7hNXbA07nGKTwHCNUjRgtUZVb4Bz4yzuy9JgSOryIeVxgIsXQL5WVDFFfdk2cmIKYq1xZcGrFwpfRq35yPU32dhspmOT10RfvugEedEqcL8Als5gTBQeHPJs0Z2D94LYADzNuNraF686iYKuCYljh6csrMsn1MKSMkqaooiibe2tS6gS5oRGldgBG0xejh3wJOEQWT7tvnXECUOxhWkXZJIa';
+
+ id   |                                                                                                                            name
+                                                                                                        |
+    description
+----------------------------------------------------------
+ 850000 | dh4jwD1bLMPCfitHAvdpkH9B9sfP37m8zo7hNXbA07nGKTwHCNUjRgtUZVb4Bz4yzuy9JgSOryIeVxgIsXQL5WVDFFfdk2cmIKYq1xZcGrFwpfRq35yPU32dhspmOT10RfvugEedEqcL8Als5gT
+BQeHPJs0Z2D94LYADzNuNraF686iYKuCYljh6csrMsn1MKSMkqaooiibe2tS6gS5oRGldgBG0xejh3wJOEQWT7tvnXECUOxhWkXZJIa | dh4jwD1bLMPCfitHAvdpkH9B9sfP37m8zo7hNXbA07nGKTwHCNU
+jRgtUZVb4Bz4yzuy9JgSOryIeVxgIsXQL5WVDFFfdk2cmIKYq1xZcGrFwpfRq35yPU32dhspmOT10RfvugEedEqcL8Als5gTBQeHPJs0Z2D94LYADzNuNraF686iYKuCYljh6csrMsn1MKSMkqaooiibe2tS6
+gS5oRGldgBG0xejh3wJOEQWT7tvnXECUOxhWkXZJIadh4jwD1bLMPCfitHAvdpkH9B9sfP37m8zo7hNXbA07nGKTwHCNUjRgtUZVb4Bz4yzuy9JgSOryIeVxgIsXQL5WVDFFfdk2cmIKYq1xZcGrFwpfRq35y
+PU32dhspmOT10RfvugEedEqcL8Als5gTBQeHPJs0Z2D94LYADzNuNraF686iYKuCYljh6csrMsn1MKSMkqaooiibe2tS6gS5oRGldgBG0xejh3wJOEQWT7tvnXECUOxhWkXZJIadh4jwD1bLMPCfitHAvdpkH
+9B9sfP37m8zo7hNXbA07nGKTwHCNUjRgtUZVb4Bz4yzuy9JgSOryIeVxgIsXQL5WVDFFfdk2cmIKYq1xZcGrFwpfRq35yPU32dhspmOT10RfvugEedEqcL8Als5gTBQeHPJs0Z2D94LYADzNuNraF686iYKuC
+Yljh6csrMsn1MKSMkqaooiibe2tS6gS5oRGldgBG0xejh3wJOEQWT7tvnXECUOxhWkXZJIa
+(1 row)
+
+     QUERY PLAN
+-------------------------------------------------------------------------------------------------------------------------------------------------------------
+ Index Scan using task2_description_idx on task2  (cost=0.68..8.69 rows=1 width=1012)
+   Index Cond: (description = 'dh4jwD1bLMPCfitHAvdpkH9B9sfP37m8zo7hNXbA07nGKTwHCNUjRgtUZVb4Bz4yzuy9JgSOryIeVxgIsXQL5WVDFFfdk2cmIKYq1xZcGrFwpfRq35yPU32dhspmOT
+10RfvugEedEqcL8Als5gTBQeHPJs0Z2D94LYADzNuNraF686iYKuCYljh6csrMsn1MKSMkqaooiibe2tS6gS5oRGldgBG0xejh3wJOEQWT7tvnXECUOxhWkXZJIadh4jwD1bLMPCfitHAvdpkH9B9sfP37m8z
+o7hNXbA07nGKTwHCNUjRgtUZVb4Bz4yzuy9JgSOryIeVxgIsXQL5WVDFFfdk2cmIKYq1xZcGrFwpfRq35yPU32dhspmOT10RfvugEedEqcL8Als5gTBQeHPJs0Z2D94LYADzNuNraF686iYKuCYljh6csrMsn
+1MKSMkqaooiibe2tS6gS5oRGldgBG0xejh3wJOEQWT7tvnXECUOxhWkXZJIadh4jwD1bLMPCfitHAvdpkH9B9sfP37m8zo7hNXbA07nGKTwHCNUjRgtUZVb4Bz4yzuy9JgSOryIeVxgIsXQL5WVDFFfdk2cmI
+KYq1xZcGrFwpfRq35yPU32dhspmOT10RfvugEedEqcL8Als5gTBQeHPJs0Z2D94LYADzNuNraF686iYKuCYljh6csrMsn1MKSMkqaooiibe2tS6gS5oRGldgBG0xejh3wJOEQWT7tvnXECUOxhWkXZJIa'::t
+ext)
+(2 rows)
+
+
+
+
+
+
+
 
 

@@ -21,19 +21,19 @@ function delete(iData $obj){
 }
 
 $objMysql = new Mysql();
-$objMysql->__set_table('user3');
-$objMysql->__set_limit("2");
+$objMysql->set_table('user3');
+$objMysql->set_limit("2");
 
-$objMysql->__set_field('name');
-$objMysql->__set_field('age');
-$objMysql->__set_field('city');
+$objMysql->set_field('name');
+$objMysql->set_field('age');
+$objMysql->set_field('city');
 
-$objMysql->__set_value('\'Suzy\'');
-$objMysql->__set_value('\'15\'');
-$objMysql->__set_value('\'Niko\'');
+$objMysql->set_value('\'Suzy\'');
+$objMysql->set_value('\'15\'');
+$objMysql->set_value('\'Niko\'');
 
-$objMysql->__set_where('name = \'Suzy\'');
-$objMysql->__set_where('age = 15');
+$objMysql->set_where('name = \'Suzy\'');
+$objMysql->set_where('age = 15');
 
 //--------------MySQL RESULTS-----------------
 $my_insert = insert($objMysql);
@@ -46,22 +46,20 @@ $my_delete = delete($objMysql);
 //$my_update = $objMysql->f_update();
 //$my_delete = $objMysql->f_delete();
 
-
 $objPostgr = new Postgresql();
-$objPostgr->__set_table('user3');
-$objPostgr->__set_limit("2");
+$objPostgr->set_table('user3');
+$objPostgr->set_limit("2");
 
-$objPostgr->__set_field('name');
-$objPostgr->__set_field('age');
-$objPostgr->__set_field('city');
+$objPostgr->set_field('name');
+$objPostgr->set_field('age');
+$objPostgr->set_field('city');
 
-$objPostgr->__set_value('\'Suzy\'');
-$objPostgr->__set_value('\'15\'');
-$objPostgr->__set_value('\'Niko\'');
+$objPostgr->set_value('\'Suzy\'');
+$objPostgr->set_value('\'15\'');
+$objPostgr->set_value('\'Niko\'');
 
-$objPostgr->__set_where('name = \'Suzy\'');
-$objPostgr->__set_where('age = 15');
-
+$objPostgr->set_where('name = \'Suzy\'');
+$objPostgr->set_where('age = 15');
 
 //--------------PG RESULTS-----------------
 $pg_insert = insert($objPostgr);
