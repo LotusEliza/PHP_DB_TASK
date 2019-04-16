@@ -1,36 +1,36 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: lotus
+ * Date: 4/15/19
+ * Time: 3:12 PM
+ */
 
 include 'config.php';
-include 'SQL.php';
-include 'Mysql.php';
-
-//Task11: Создать класс для реализации Актив рекордс:
-//В работе нужно применить Sql (Task4) класс и таблицу MY_TEST из бд MySQL
-
-$customer = new  ActiveRecord();
+include 'autoload.php';
 
 
-//$first = new SQL();
+$obj = ActiveRecords::newEmptyInstance();
+$obj->setTitle('Pirates of the Caribbean');
+$obj->setPrice('22');
+$obj->setDescription('very onteresting book.');
+$result1 = $obj->save();
+$obj->setDescription('Updated.');
+$result2 = $obj->save();
+
+$result3 = $obj->find(1);
+//var_dump($result3);
+//$result4 = $obj::newInstance(2);
+//echo $obj->getId();
+$result5 = $obj::_delete(1);
 
 
-//
-//$first = new Mysql();
-//$first->__set_field('`name`');
-//$first->__set_field('`age`');
-//$first->__set_field('`city`');
-//
-//$first->__set_value('\'Met\'');
-//$first->__set_value('\'29\'');
-//$first->__set_value('\'Niko\'');
-//
-//$first->__set_where('`name` = \'liza\'');
-////$first->__set_where('age = 29');
-////$first->__set_where('city = Niko');
-//
-//$first->__set_table('test_table');
-//$mysql1 = $first->f_insert();
-//$mysql2 = $first->f_select();
-//$mysql3 = $first->f_update();
-//$mysql4 = $first->f_delete();
+//$obj1 = ActiveRecords::newEmptyInstance();
+//$result = $obj1::newInstance(5);
+//var_dump($result);
+//echo $obj1->getId();
+//echo $obj->getId();
+
+$result = Helper::createTable($result3);
 
 include 'templates/index.php';
