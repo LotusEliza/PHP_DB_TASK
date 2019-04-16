@@ -1,8 +1,15 @@
+<<<<<<< HEAD:task_4/dump_sql/in (2).sql
 CREATE TABLE user3 (
 id INT(6)  AUTO_INCREMENT PRIMARY KEY,
 name VARCHAR(30) NOT NULL,
 pwd VARCHAR(30) NOT NULL,
 email VARCHAR(50)
+=======
+CREATE TABLE task2 (
+id INT NOT NULL,
+name VARCHAR(255) NOT NULL,
+description TEXT NOT NULL
+>>>>>>> c5caf91001dcb8547cf72b66740a7c1115e13fa5:task_4/dump_sql/helper.sql
 );
 
 

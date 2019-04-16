@@ -1,7 +1,4 @@
 
--- Table: public.user3
-
--- DROP TABLE public.user3;
 
 CREATE TABLE public.user3
 (
@@ -23,4 +20,16 @@ ALTER TABLE public.user3
 
 ALTER TABLE public.user3
     ADD CONSTRAINT user3_pkey PRIMARY KEY (id);
+
+INSERT INTO user3 (id, name,  city, age)
+VALUES
+       (1, 'Liza', 'Niko', 29),
+       (2, 'Val', 'Niko', 32),
+       (3, 'Anna', 'Niko', 18),
+       (5, 'Nick', 'NY', 21),
+       (6, 'Anna', 'Niko', 18),
+       (7, 'Madonna', 'NY', 50),
+       (8, 'Cardinal', 'Stavanger', 34),
+       (9, 'liza`', 'Niko', 29);
+
 

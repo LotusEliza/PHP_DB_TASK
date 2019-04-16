@@ -2,18 +2,9 @@
 
 class SQL
 {
-//Task10: Расширить свой Sql класс, что бы он смог работать c Distinct, Join, Group, Having, Order, Limit
-//Join::
-//join(): добавляет к запросу INNER JOIN.
-//leftJoin(): добавляет к запросу LEFT OUTER JOIN.
-//rightJoin(): добавляет к запросу RIGHT OUTER JOIN.
-//crossJoin(): добавляет к запросу CROSS JOIN.
-//naturalJoin(): добавляет к запросу NATURAL JOIN.
-//Практика - сделать класс для MySQL/PostgreSQL на PDO c применением “Текучего Интерфейса”
-//(должно быть использование prepare, execute, bindParam для безопасного выполнения SQL)
-
     protected $values=[];
     protected $values2=[];
+    protected $upvalues=[];
     protected $fields=[];
     protected $fields2=[];
     protected $onfield;
@@ -30,109 +21,109 @@ class SQL
     protected $having=[];
     protected $keys;
 
-
-    public function __set_table($table){
+    public function set_table($table){
         $this->table = $table;
     }
 
-    public function __set_table2($table2){
+    public function set_table2($table2){
         $this->table2 = $table2;
     }
 
-    public function __set_field($field){
+    public function set_field($field){
         array_push($this->fields,"$field");
     }
 
-    public function __set_field2($field2){
+    public function set_field2($field2){
         array_push($this->fields2,"$field2");
     }
 
-    public function __set_onfield($onfield){
+    public function set_onfield($onfield){
         $this->onfield = $onfield;
     }
 
-    public function __set_onfield2($onfield2){
+    public function set_onfield2($onfield2){
         $this->onfield2 = $onfield2;
     }
 
-    public function __set_order($order){
+    public function set_order($order){
         $this->order = $order;
     }
 
-    public function __set_group($group){
+    public function set_group($group){
         $this->group = $group;
     }
 
-    public function __set_having($having){
+    public function set_having($having){
         $this->having = $having;
     }
 
-    public function __set_value($value){
+    public function set_value($value){
         array_push($this->values,"$value");
-//        var_dump($this->values);
     }
 
-    public function __set_value2($value2){
+    public function set_value2($value2){
         array_push($this->values2,"$value2");
-//        var_dump($this->values);
     }
 
-//    public function __set_where($where){
-//        array_push($this->where,"$where");
-////        var_dump($this->where);
-//    }
+    public function set_upvalue($value){
+        array_push($this->upvalues,"$value");
+    }
 
-    public function __set_join($type){
+    public function set_join($type){
         $this->join = $type;
     }
 
-    public function __set_where_f($field){
+    public function set_where_f($field){
         array_push($this->where_f,"$field");
     }
 
-    public function __set_where_v($value){
+    public function set_where_v($value){
         array_push($this->where_v,"$value");
     }
 
-
-
     public function f_select(){
-       if(!$this->table2){
            $fields_str = implode(", ", $this->fields);
            $this->query .= "SELECT $fields_str";
            return $this;
-       }else{
-           $array = $this->tabl_field($this->fields, $this->table);
-           $array2 = $this->tabl_field($this->fields2, $this->table2);
-           $fields_str = implode(", ", $array);
-           $fields_str2 = implode(", ", $array2);
+    }
 
-           $this->query .= "SELECT $fields_str, $fields_str2 ";
-           return $this;
-       }
+    public function f_select2(){
+
+            $array = $this->tabl_field($this->fields, $this->table);
+            $array2 = $this->tabl_field($this->fields2, $this->table2);
+            $fields_str = implode(", ", $array);
+            $fields_str2 = implode(", ", $array2);
+
+            $this->query .= "SELECT $fields_str, $fields_str2 ";
+            return $this;
     }
 
      public function f_join(){
          $fields_str = $this->table.".".$this->onfield;
          $fields_str2 = $this->table2.".".$this->onfield2;
+         $inner ="inner";
+         $left_outer ="left_outer";
+         $right_outer ="right_outer";
+         $cross = "cross";
+         $natural = "natural";
 
-         if($this->join == "inner"){
+         if($this->join == $inner){
              $this->query .= " INNER JOIN $this->table2 ON $fields_str=$fields_str2";
              return $this;
-         }elseif ($this->join == "left"){
-             $this->query .= " LEFT JOIN $this->table2 ON $fields_str=$fields_str2";
+         }elseif ($this->join ==  $left_outer){
+             $this->query .= " LEFT OUTER JOIN $this->table2 ON $fields_str=$fields_str2";
              return $this;
-         }elseif ($this->join == "right"){
-             $this->query .= " RIGHT JOIN $this->table2 ON $fields_str=$fields_str2";
+         }elseif ($this->join == $right_outer){
+             $this->query .= " RIGHT OUTER JOIN $this->table2 ON $fields_str=$fields_str2";
              return $this;
-         }elseif ($this->join == "cross"){
+         }elseif ($this->join == $cross){
              $this->query .= " CROSS JOIN $this->table2";
              return $this;
-         }elseif ($this->join == "natural"){
+         }elseif ($this->join == $natural){
              $this->query .= " NATURAL JOIN $this->table2";
              return $this;
          }else{
-             return NULL;
+             return ERROR_JOIN;
          }
      }
 
@@ -144,7 +135,7 @@ class SQL
     }
 
     public function f_from(){
-        $this->query .= " FROM `$this->table`";
+        $this->query .= " FROM $this->table";
         return $this;
     }
 
@@ -218,32 +209,5 @@ class SQL
     public function implode_and($str){
         return $result = implode(" AND ", $str);
     }
+
 }
-
-//    public function f_leftjoin(){
-//        $fields_str = $this->table.".".$this->onfield;
-//        $fields_str2 = $this->table2.".".$this->onfield2;
-//
-//        $this->query .= " LEFT JOIN $this->table2 ON $fields_str=$fields_str2";
-//        return $this;
-//    }
-
-
-// public function f_select(){
-//     $fields_str = implode(", ", $this->fields);
-//     $where_str = implode(" AND ", $this->where);
-
-//     $query = "SELECT $fields_str FROM `$this->table` WHERE $where_str";
-//     $this->query = $query;
-// }
-
-
-//    public function f_select(){
-//        $fields_str = implode(", ", $this->fields);
-//
-//        $this->query .= "SELECT $fields_str";
-//        // $this->query = $query;
-//        return $this;
-//    }
-
-

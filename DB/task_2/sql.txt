@@ -1,0 +1,29 @@
+
+CREATE TABLE task2 (
+id INT NOT NULL,
+name VARCHAR(255) NOT NULL,
+description TEXT NOT NULL
+);
+
+SELECT * FROM `task2` WHERE id= 850000;
+
+
+___________________ADD INDEXEX___________________________________
+ALTER TABLE `task2` ADD INDEX(`id`);
+CREATE INDEX idx_lastname ON Persons (LastName);
+ALTER TABLE task2 ADD FULLTEXT (description);
+
+-------------------------PG--------------------------
+
+CREATE TABLE task2 (
+id INT NOT NULL,
+name VARCHAR(250) NOT NULL,
+description TEXT NOT NULL
+);
+
+SELECT * FROM task2 WHERE id= 850000;
+
+CREATE INDEX ON task2(name);
+
+
+

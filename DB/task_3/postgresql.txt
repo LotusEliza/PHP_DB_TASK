@@ -1,0 +1,308 @@
+______________________WITHOUT INDEXEX__________________________________
+
+-----WITHOUT EXPLAIN--------------------------------------------------
+
+SELECT * FROM TableA INNER JOIN TableB ON TableA.name = TableB.name
+
+ id |  name  | id |  name
+----+--------+----+--------
+  1 | Pirate |  2 | Pirate
+  3 | Ninja  |  4 | Ninja
+(2 rows)
+
+
+SELECT * FROM TableA FULL OUTER JOIN TableB ON TableA.name = TableB.name
+
+ id |   name    | id |    name
+----+-----------+----+-------------
+  1 | Pirate    |  2 | Pirate
+  2 | Monkey    |    |
+  3 | Ninja     |  4 | Ninja
+  4 | Spaghetti |    |
+    |           |  3 | Darth Vader
+    |           |  1 | Rutabaga
+(6 rows)
+
+
+SELECT * FROM TableA LEFT OUTER JOIN TableB ON TableA.name = TableB.name
+
+ id |   name    | id |  name
+----+-----------+----+--------
+  1 | Pirate    |  2 | Pirate
+  2 | Monkey    |    |
+  3 | Ninja     |  4 | Ninja
+  4 | Spaghetti |    |
+(4 rows)
+
+
+SELECT * FROM TableA LEFT OUTER JOIN TableB ON TableA.name = TableB.name WHERE TableB.id IS null
+
+ id |   name    | id | name
+----+-----------+----+------
+  2 | Monkey    |    |
+  4 | Spaghetti |    |
+(2 rows)
+
+
+SELECT * FROM TableA FULL OUTER JOIN TableB ON TableA.name = TableB.name WHERE TableA.id IS null OR TableB.id IS null
+
+ id |   name    | id |    name
+----+-----------+----+-------------
+  2 | Monkey    |    |
+  4 | Spaghetti |    |
+    |           |  3 | Darth Vader
+    |           |  1 | Rutabaga
+(4 rows)
+
+
+SELECT * FROM TableA CROSS JOIN TableB
+
+ id |   name    | id |    name
+----+-----------+----+-------------
+  1 | Pirate    |  1 | Rutabaga
+  1 | Pirate    |  2 | Pirate
+  1 | Pirate    |  3 | Darth Vader
+  1 | Pirate    |  4 | Ninja
+  2 | Monkey    |  1 | Rutabaga
+  2 | Monkey    |  2 | Pirate
+  2 | Monkey    |  3 | Darth Vader
+  2 | Monkey    |  4 | Ninja
+  3 | Ninja     |  1 | Rutabaga
+  3 | Ninja     |  2 | Pirate
+  3 | Ninja     |  3 | Darth Vader
+  3 | Ninja     |  4 | Ninja
+  4 | Spaghetti |  1 | Rutabaga
+  4 | Spaghetti |  2 | Pirate
+  4 | Spaghetti |  3 | Darth Vader
+  4 | Spaghetti |  4 | Ninja
+(16 rows)
+
+
+-----WITH EXPLAIN--------------------------------------------------
+
+EXPLAIN SELECT * FROM TableA INNER JOIN TableB ON TableA.name = TableB.name
+
+  QUERY PLAN
+-----------------------------------------------------------------------
+ Hash Join  (cost=22.15..89.93 rows=1458 width=244)
+   Hash Cond: ((tablea.name)::text = (tableb.name)::text)
+   ->  Seq Scan on tablea  (cost=0.00..15.40 rows=540 width=122)
+   ->  Hash  (cost=15.40..15.40 rows=540 width=122)
+         ->  Seq Scan on tableb  (cost=0.00..15.40 rows=540 width=122)
+(5 rows)
+
+
+EXPLAIN SELECT * FROM TableA FULL OUTER JOIN TableB ON TableA.name = TableB.name
+
+ QUERY PLAN
+-----------------------------------------------------------------------
+ Hash Full Join  (cost=22.15..89.93 rows=1458 width=244)
+   Hash Cond: ((tablea.name)::text = (tableb.name)::text)
+   ->  Seq Scan on tablea  (cost=0.00..15.40 rows=540 width=122)
+   ->  Hash  (cost=15.40..15.40 rows=540 width=122)
+         ->  Seq Scan on tableb  (cost=0.00..15.40 rows=540 width=122)
+(5 rows)
+
+
+EXPLAIN SELECT * FROM TableA LEFT OUTER JOIN TableB ON TableA.name = TableB.name
+
+      QUERY PLAN
+-----------------------------------------------------------------------
+ Hash Left Join  (cost=22.15..89.93 rows=1458 width=244)
+   Hash Cond: ((tablea.name)::text = (tableb.name)::text)
+   ->  Seq Scan on tablea  (cost=0.00..15.40 rows=540 width=122)
+   ->  Hash  (cost=15.40..15.40 rows=540 width=122)
+         ->  Seq Scan on tableb  (cost=0.00..15.40 rows=540 width=122)
+(5 rows)
+
+
+EXPLAIN SELECT * FROM TableA LEFT OUTER JOIN TableB ON TableA.name = TableB.name WHERE TableB.id IS null
+
+   QUERY PLAN
+-----------------------------------------------------------------------
+ Hash Left Join  (cost=22.15..89.93 rows=7 width=244)
+   Hash Cond: ((tablea.name)::text = (tableb.name)::text)
+   Filter: (tableb.id IS NULL)
+   ->  Seq Scan on tablea  (cost=0.00..15.40 rows=540 width=122)
+   ->  Hash  (cost=15.40..15.40 rows=540 width=122)
+         ->  Seq Scan on tableb  (cost=0.00..15.40 rows=540 width=122)
+(6 rows)
+
+
+EXPLAIN SELECT * FROM TableA FULL OUTER JOIN TableB ON TableA.name = TableB.name WHERE TableA.id IS null OR TableB.id IS null
+
+ QUERY PLAN
+-----------------------------------------------------------------------
+ Hash Full Join  (cost=22.15..89.93 rows=15 width=244)
+   Hash Cond: ((tablea.name)::text = (tableb.name)::text)
+   Filter: ((tablea.id IS NULL) OR (tableb.id IS NULL))
+   ->  Seq Scan on tablea  (cost=0.00..15.40 rows=540 width=122)
+   ->  Hash  (cost=15.40..15.40 rows=540 width=122)
+         ->  Seq Scan on tableb  (cost=0.00..15.40 rows=540 width=122)
+(6 rows)
+
+
+EXPLAIN SELECT * FROM TableA CROSS JOIN TableB
+
+     QUERY PLAN
+-----------------------------------------------------------------------
+ Nested Loop  (cost=0.00..3677.15 rows=291600 width=244)
+   ->  Seq Scan on tablea  (cost=0.00..15.40 rows=540 width=122)
+   ->  Materialize  (cost=0.00..18.10 rows=540 width=122)
+         ->  Seq Scan on tableb  (cost=0.00..15.40 rows=540 width=122)
+(4 rows)
+
+
+______________________WITH INDEXEX__________________________________
+
+-----WITHOUT EXPLAIN--------------------------------------------------
+
+SELECT * FROM TableA INNER JOIN TableB ON TableA.name = TableB.name
+
+ id |  name  | id |  name
+----+--------+----+--------
+  1 | Pirate |  2 | Pirate
+  3 | Ninja  |  4 | Ninja
+(2 rows)
+
+
+SELECT * FROM TableA FULL OUTER JOIN TableB ON TableA.name = TableB.name
+
+ id |   name    | id |    name
+----+-----------+----+-------------
+  1 | Pirate    |  2 | Pirate
+  2 | Monkey    |    |
+  3 | Ninja     |  4 | Ninja
+  4 | Spaghetti |    |
+    |           |  3 | Darth Vader
+    |           |  1 | Rutabaga
+(6 rows)
+
+
+SELECT * FROM TableA LEFT OUTER JOIN TableB ON TableA.name = TableB.name
+
+ id |   name    | id |  name
+----+-----------+----+--------
+  1 | Pirate    |  2 | Pirate
+  2 | Monkey    |    |
+  3 | Ninja     |  4 | Ninja
+  4 | Spaghetti |    |
+(4 rows)
+
+
+SELECT * FROM TableA LEFT OUTER JOIN TableB ON TableA.name = TableB.name WHERE TableB.id IS null
+
+ id |   name    | id | name
+----+-----------+----+------
+  2 | Monkey    |    |
+  4 | Spaghetti |    |
+(2 rows)
+
+
+SELECT * FROM TableA FULL OUTER JOIN TableB ON TableA.name = TableB.name WHERE TableA.id IS null OR TableB.id IS null
+
+ id |   name    | id |    name
+----+-----------+----+-------------
+  2 | Monkey    |    |
+  4 | Spaghetti |    |
+    |           |  3 | Darth Vader
+    |           |  1 | Rutabaga
+(4 rows)
+
+
+SELECT * FROM TableA CROSS JOIN TableB
+
+ id |   name    | id |    name
+----+-----------+----+-------------
+  1 | Pirate    |  1 | Rutabaga
+  1 | Pirate    |  2 | Pirate
+  1 | Pirate    |  3 | Darth Vader
+  1 | Pirate    |  4 | Ninja
+  2 | Monkey    |  1 | Rutabaga
+  2 | Monkey    |  2 | Pirate
+  2 | Monkey    |  3 | Darth Vader
+  2 | Monkey    |  4 | Ninja
+  3 | Ninja     |  1 | Rutabaga
+  3 | Ninja     |  2 | Pirate
+  3 | Ninja     |  3 | Darth Vader
+  3 | Ninja     |  4 | Ninja
+  4 | Spaghetti |  1 | Rutabaga
+  4 | Spaghetti |  2 | Pirate
+  4 | Spaghetti |  3 | Darth Vader
+  4 | Spaghetti |  4 | Ninja
+(16 rows)
+
+
+-----WITH EXPLAIN--------------------------------------------------
+
+EXPLAIN SELECT * FROM TableA INNER JOIN TableB ON TableA.name = TableB.name
+
+    QUERY PLAN
+-----------------------------------------------------------------------
+ Hash Join  (cost=22.15..89.93 rows=1458 width=244)
+   Hash Cond: ((tablea.name)::text = (tableb.name)::text)
+   ->  Seq Scan on tablea  (cost=0.00..15.40 rows=540 width=122)
+   ->  Hash  (cost=15.40..15.40 rows=540 width=122)
+         ->  Seq Scan on tableb  (cost=0.00..15.40 rows=540 width=122)
+(5 rows)
+
+
+EXPLAIN SELECT * FROM TableA FULL OUTER JOIN TableB ON TableA.name = TableB.name
+
+  QUERY PLAN
+-----------------------------------------------------------------------
+ Hash Full Join  (cost=22.15..89.93 rows=1458 width=244)
+   Hash Cond: ((tablea.name)::text = (tableb.name)::text)
+   ->  Seq Scan on tablea  (cost=0.00..15.40 rows=540 width=122)
+   ->  Hash  (cost=15.40..15.40 rows=540 width=122)
+         ->  Seq Scan on tableb  (cost=0.00..15.40 rows=540 width=122)
+(5 rows)
+
+
+EXPLAIN SELECT * FROM TableA LEFT OUTER JOIN TableB ON TableA.name = TableB.name
+
+                              QUERY PLAN
+-----------------------------------------------------------------------
+ Hash Left Join  (cost=22.15..89.93 rows=1458 width=244)
+   Hash Cond: ((tablea.name)::text = (tableb.name)::text)
+   ->  Seq Scan on tablea  (cost=0.00..15.40 rows=540 width=122)
+   ->  Hash  (cost=15.40..15.40 rows=540 width=122)
+         ->  Seq Scan on tableb  (cost=0.00..15.40 rows=540 width=122)
+(5 rows)
+
+
+EXPLAIN SELECT * FROM TableA LEFT OUTER JOIN TableB ON TableA.name = TableB.name WHERE TableB.id IS null
+
+      QUERY PLAN
+-----------------------------------------------------------------------
+ Hash Left Join  (cost=22.15..89.93 rows=7 width=244)
+   Hash Cond: ((tablea.name)::text = (tableb.name)::text)
+   Filter: (tableb.id IS NULL)
+   ->  Seq Scan on tablea  (cost=0.00..15.40 rows=540 width=122)
+   ->  Hash  (cost=15.40..15.40 rows=540 width=122)
+         ->  Seq Scan on tableb  (cost=0.00..15.40 rows=540 width=122)
+(6 rows)
+
+
+EXPLAIN SELECT * FROM TableA FULL OUTER JOIN TableB ON TableA.name = TableB.name WHERE TableA.id IS null OR TableB.id IS null
+
+    QUERY PLAN
+-----------------------------------------------------------------------
+ Hash Full Join  (cost=22.15..89.93 rows=15 width=244)
+   Hash Cond: ((tablea.name)::text = (tableb.name)::text)
+   Filter: ((tablea.id IS NULL) OR (tableb.id IS NULL))
+   ->  Seq Scan on tablea  (cost=0.00..15.40 rows=540 width=122)
+   ->  Hash  (cost=15.40..15.40 rows=540 width=122)
+         ->  Seq Scan on tableb  (cost=0.00..15.40 rows=540 width=122)
+(6 rows)
+
+
+EXPLAIN SELECT * FROM TableA CROSS JOIN TableB
+
+     QUERY PLAN
+-----------------------------------------------------------------------
+ Nested Loop  (cost=0.00..3677.15 rows=291600 width=244)
+   ->  Seq Scan on tablea  (cost=0.00..15.40 rows=540 width=122)
+   ->  Materialize  (cost=0.00..18.10 rows=540 width=122)
+         ->  Seq Scan on tableb  (cost=0.00..15.40 rows=540 width=122)
+(4 rows)

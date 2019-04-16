@@ -39,11 +39,11 @@ class FileRead
         $array=$this->file;
         $count = count($array);
         $string="__PRINT_BY_SYMBOL_\"\n\"";
-        $this->save_file_line($string);
+        $this->save_line($string);
         for ($i = 0; $i < $count; $i++){
             $line = htmlspecialchars($array[$i]);
             $farray = str_split($line);
-            $this->save_array_file($farray);
+            $this->save_array($farray);
         }
     }
 
@@ -52,8 +52,8 @@ class FileRead
         $array=$this->file;
         $array[$line+1]= $newline;
         $string="__SET_LINE_\"\n\"";
-        $this->save_file_line($string);
-        $this->save_array_file($array);
+        $this->save_line($string);
+        $this->save_array($array);
         return $array;
     }
 
@@ -62,19 +62,19 @@ class FileRead
         $array=$this->file;
         $array[$line+1][$symbol+1] = $newsymbol;
         $string="__SET_SYMBOL_\"\n\"";
-        $this->save_file_line($string);
-        $this->save_array_file($array);
+        $this->save_line($string);
+        $this->save_array($array);
         return $array;
     }
 
-    public function save_array_file($array)
+    public function save_array($array)
     {
         foreach ($array as $line){
             file_put_contents("wfile.txt", print_r($line, true), FILE_APPEND);
         }
     }
 
-    public function save_file_line($string)
+    public function save_line($string)
     {
             file_put_contents("wfile.txt", print_r($string, true), FILE_APPEND);
     }
