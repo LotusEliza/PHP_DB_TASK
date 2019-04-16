@@ -19,7 +19,8 @@
 
     function check_perm(){
         $permission=substr(sprintf("%o",fileperms(DIR)),-4);
-        if ($permission=="0777"){
+        $perm = "0777";
+        if ($permission==$perm){
            return true;
         }else{
             return false;
@@ -61,7 +62,6 @@
         }
 
     }
-
 
     function format_size_units($bytes)
     {

@@ -2,17 +2,17 @@
 
 require 'libs/Calc.php';
 
-//class CalculatorTests extends PHPUnit_Framework_TestCase
-class CalculatorTests extends PHPUnit\Framework\TestCase
+class CalculatorTests extends PHPUnit_Framework_TestCase
+//class CalculatorTests extends PHPUnit\Framework\TestCase
 {
     private $calculator;
 
-    public function setUp(): void
+    public function setUp()
     {
         $this->calculator = new Calc();
     }
  
-    protected function tearDown(): void
+    protected function tearDown()
     {
         $this->calculator = NULL;
     }
