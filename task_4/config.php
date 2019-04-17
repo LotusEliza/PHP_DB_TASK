@@ -5,42 +5,32 @@
  * Date: 3/26/19
  * Time: 11:39 AM
  */
-<<<<<<< HEAD
 
 //------------CONNECT MySQL---------------
-=======
-//
-////------------CONNECT MySQL HOME---------------
+
+//------------CONNECT MySQL HOME---------------
 //define('DB_USER', 'phpmyadmin');
 //define('DB_PASS', '12122');
 //define('DB_NAME', 'user3');
 //define('DB_HOST', 'localhost');
-////------------CONNECT PG HOME---------------
+//------------CONNECT PG HOME---------------
 //define('PG_USER', 'user3');
 //define('PG_PASS', '12122');
 //define('PG_NAME', 'user3');
 //define('PG_HOST', 'localhost');
 
 //------------CONNECT MySQL CLASS---------------
->>>>>>> c5caf91001dcb8547cf72b66740a7c1115e13fa5
 define('DB_USER', 'user3');
 define('DB_PASS', 'user3');
 define('DB_NAME', 'user3');
 define('DB_HOST', 'localhost');
-<<<<<<< HEAD
 
-//------------CONNECT PG---------------
+
+//------------CONNECT PG CLASS---------------
 define('PG_USER', 'user3');
 define('PG_PASS', '-Uuser3');
 define('PG_NAME', 'user3');
 define('PG_HOST', 'localhost');
-=======
-////------------CONNECT PG CLASS---------------
-//define('PG_USER', 'user3');
-//define('PG_PASS', '-Uuser3');
-//define('PG_NAME', 'user3');
-//define('PG_HOST', 'localhost');
->>>>>>> c5caf91001dcb8547cf72b66740a7c1115e13fa5
 
 //----------ERROR CONNECT DB--------------
 define("ERROR_MYSQL", "DB Error, could not query the database\n MySQL Error: ");

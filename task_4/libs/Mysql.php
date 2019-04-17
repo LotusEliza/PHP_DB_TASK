@@ -20,14 +20,14 @@ class Mysql extends SQL implements iData
     public function f_select(){
         parent::f_select();
         $result = mysql_query($this->query, $this->link);
-        
+
         if (!$result){
             return ERROR_MYSQL . mysql_error();
 
         }else{
             $array_result=[];
             while ($row = mysql_fetch_assoc($result)) {
-                $array_result[] = array('name'=>$row["name"], 'city'=>$row["city"], 'age'=>$row["age"]);
+                $array_result[] = $row;
             }
             return $array_result;
         }
