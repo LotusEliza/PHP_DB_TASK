@@ -10,13 +10,13 @@
 <main>
     <h3>PDO results:</h3>
     <hr>
-    <p>1. INSERT: <?=$res_ins;?></p>
+    <p>1. INSERT: <?=$resIns;?></p>
     <div>
-        <p>2. JOIN: <?=$tabl_join;?></p>
-        <p>3. HAVING and GROUP BY: <?=$tabl_hav;?></p>
-        <p>4. ORDER BY: <?=$tabl_ord;?></p>
-        <p>5. UPDATE: <?=$res_upd;?></p>
-        <p>6. DELETE: <?=$res_del;?></p>
+        <p>2. JOIN: <?=$tablJoin;?></p>
+        <p>3. HAVING and GROUP BY: <?=$tablHav;?></p>
+        <p>4. ORDER BY: <?=$tablOrd;?></p>
+        <p>5. UPDATE: <?=$resUpd;?></p>
+        <p>6. DELETE: <?=$resDel;?></p>
     </div>
 </main>
 

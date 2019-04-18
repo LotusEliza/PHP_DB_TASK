@@ -4,14 +4,14 @@ class SQL
 {
     protected $values=[];
     protected $values2=[];
-    protected $upvalues=[];
+    protected $upValues=[];
     protected $fields=[];
     protected $fields2=[];
-    protected $onfield;
-    protected $onfield2;
+    protected $onField;
+    protected $onField2;
     protected $where=[];
-    protected $where_f=[];
-    protected $where_v=[];
+    protected $whereF=[];
+    protected $whereV=[];
     protected $table;
     protected $table2;
     protected $query;
@@ -21,100 +21,100 @@ class SQL
     protected $having=[];
     protected $keys;
 
-    public function set_table($table){
+    public function setTable($table){
         $this->table = $table;
     }
 
-    public function set_table2($table2){
+    public function setTable2($table2){
         $this->table2 = $table2;
     }
 
-    public function set_field($field){
+    public function setField($field){
         array_push($this->fields,"$field");
     }
 
-    public function set_field2($field2){
+    public function setField2($field2){
         array_push($this->fields2,"$field2");
     }
 
-    public function set_onfield($onfield){
-        $this->onfield = $onfield;
+    public function setOnField($onField){
+        $this->onField = $onField;
     }
 
-    public function set_onfield2($onfield2){
-        $this->onfield2 = $onfield2;
+    public function setOnField2($onField2){
+        $this->onField2 = $onField2;
     }
 
-    public function set_order($order){
+    public function setOrder($order){
         $this->order = $order;
     }
 
-    public function set_group($group){
+    public function setGroup($group){
         $this->group = $group;
     }
 
-    public function set_having($having){
+    public function setHaving($having){
         $this->having = $having;
     }
 
-    public function set_value($value){
+    public function setValue($value){
         array_push($this->values,"$value");
     }
 
-    public function set_value2($value2){
+    public function setValue2($value2){
         array_push($this->values2,"$value2");
     }
 
-    public function set_upvalue($value){
-        array_push($this->upvalues,"$value");
+    public function setUpValue($value){
+        array_push($this->upValues,"$value");
     }
 
-    public function set_join($type){
+    public function setJoin($type){
         $this->join = $type;
     }
 
-    public function set_where_f($field){
-        array_push($this->where_f,"$field");
+    public function setWhereF($field){
+        array_push($this->whereF,"$field");
     }
 
-    public function set_where_v($value){
-        array_push($this->where_v,"$value");
+    public function setWhereV($value){
+        array_push($this->whereV,"$value");
     }
 
     public function f_select(){
-           $fields_str = implode(", ", $this->fields);
-           $this->query .= "SELECT $fields_str";
+           $fieldsStr = implode(", ", $this->fields);
+           $this->query .= "SELECT $fieldsStr";
            return $this;
     }
 
     public function f_select2(){
 
-            $array = $this->tabl_field($this->fields, $this->table);
-            $array2 = $this->tabl_field($this->fields2, $this->table2);
-            $fields_str = implode(", ", $array);
-            $fields_str2 = implode(", ", $array2);
+            $array = $this->tablField($this->fields, $this->table);
+            $array2 = $this->tablField($this->fields2, $this->table2);
+            $fieldsStr = implode(", ", $array);
+            $fieldsStr2 = implode(", ", $array2);
 
-            $this->query .= "SELECT $fields_str, $fields_str2 ";
+            $this->query .= "SELECT $fieldsStr, $fieldsStr2 ";
             return $this;
     }
 
      public function f_join(){
-         $fields_str = $this->table.".".$this->onfield;
-         $fields_str2 = $this->table2.".".$this->onfield2;
+         $fieldsStr = $this->table.".".$this->onField;
+         $fieldsStr2 = $this->table2.".".$this->onField2;
          $inner ="inner";
-         $left_outer ="left_outer";
-         $right_outer ="right_outer";
+         $leftOuter ="leftOuter";
+         $rightOuter ="rightOuter";
          $cross = "cross";
          $natural = "natural";
 
          if($this->join == $inner){
-             $this->query .= " INNER JOIN $this->table2 ON $fields_str=$fields_str2";
+             $this->query .= " INNER JOIN $this->table2 ON $fieldsStr=$fieldsStr2";
              return $this;
-         }elseif ($this->join ==  $left_outer){
-             $this->query .= " LEFT OUTER JOIN $this->table2 ON $fields_str=$fields_str2";
+         }elseif ($this->join ==  $leftOuter){
+             $this->query .= " LEFT OUTER JOIN $this->table2 ON $fieldsStr=$fieldsStr2";
              return $this;
-         }elseif ($this->join == $right_outer){
-             $this->query .= " RIGHT OUTER JOIN $this->table2 ON $fields_str=$fields_str2";
+         }elseif ($this->join == $rightOuter){
+             $this->query .= " RIGHT OUTER JOIN $this->table2 ON $fieldsStr=$fieldsStr2";
              return $this;
          }elseif ($this->join == $cross){
              $this->query .= " CROSS JOIN $this->table2";
@@ -127,7 +127,7 @@ class SQL
          }
      }
 
-    public function tabl_field($array, $table){
+    public function tablField($array, $table){
         foreach ($array as &$item) {
             $item = $table.".".$item;
         }
@@ -141,8 +141,8 @@ class SQL
 
     public function f_where(){
         $array=[];
-        $keys = $this->prep_bind($this->where_v);
-        foreach (array_combine($this->where_f, $keys) as $field => $value) {
+        $keys = $this->prepBind($this->whereV);
+        foreach (array_combine($this->whereF, $keys) as $field => $value) {
             array_push($array,"$field=$value");
         }
         $where_str = implode(" AND ", $array);
@@ -150,12 +150,12 @@ class SQL
         return $this;
     }
 
-    public function order_by(){
+    public function orderBy(){
         $this->query .= " ORDER BY $this->order";
         return $this;
     }
 
-    public function group_by(){
+    public function groupBy(){
         $this->query .= " GROUP BY $this->group";
         return $this;
     }
@@ -168,28 +168,28 @@ class SQL
     public function f_update(){
         $update=[];
         $this->values;
-        $keys = $this->prep_bind($this->values);
+        $keys = $this->prepBind($this->values);
         foreach (array_combine($this->fields, $keys) as $field => $value) {
             array_push($update,"$field=$value");
         }
-        $str = $this->implode_dot($update);
+        $str = $this->implodeDot($update);
         $this->query .= "UPDATE $this->table SET $str";
         return $this;
     }
 
     public function f_insert(){
-        $fields_str = $this->implode_dot($this->fields);
+        $fields_str = $this->implodeDot($this->fields);
         $keys = array_keys($this->values);
         foreach ($keys as &$value) {
             $value = ':'.$value;
         }
-        $values_str = $this->implode_dot($keys);
+        $values_str = $this->implodeDot($keys);
 
         $this->query .= "INSERT INTO $this->table ($fields_str) VALUES ($values_str)";
         return $this;
     }
 
-        public function prep_bind($values){
+        public function prepBind($values){
         $keys = array_keys($values);
         foreach ($keys as &$value) {
             $value = ':'.$value;
@@ -202,11 +202,11 @@ class SQL
         return $this;
     }
 
-    public function implode_dot($str){
+    public function implodeDot($str){
         return $result = implode(", ", $str);
     }
 
-    public function implode_and($str){
+    public function implodeAnd($str){
         return $result = implode(" AND ", $str);
     }
 

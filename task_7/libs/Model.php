@@ -45,7 +45,7 @@ class Model
                  $this->array['%ERROR_NAME%'] = "Only letters and white space allowed";
              } else {
                  $this->array['%NAME%'] = $name;
-                 $this->setval+=1;
+                 $this->setval++;
              }
          }
 
@@ -58,7 +58,7 @@ class Model
                 $this->array['%ERROR_EMAIL%'] = "Invalid email format";
             }else{
                 $this->array['%EMAIL%'] = $email;
-                $this->setval+=1;
+                $this->setval++;
             }
          }
 
@@ -68,13 +68,13 @@ class Model
          }else{
              if($_POST["subject"]=="subject1"){
                  $this->array['%SUBJECT1%']="selected = \"selected\"";
-                 $this->setval+=1;
+                 $this->setval++;
              }elseif ($_POST["subject"]=="subject2"){
                  $this->array['%SUBJECT2%']="selected = \"selected\"";
-                 $this->setval+=1;
+                 $this->setval++;
              }elseif ($_POST["subject"]=="subject3"){
                  $this->array['%SUBJECT3%']="selected = \"selected\"";
-                 $this->setval+=1;
+                 $this->setval++;
              }
          }
 
@@ -84,10 +84,11 @@ class Model
         } else {
             $comment = $this->test_input($_POST["comment"]);
             $this->array['%COMMENT%'] = $comment;
-            $this->setval+=1;
+            $this->setval++;
         }
 
-        if($this->setval == 4){
+        $var = 4;
+        if($this->setval == $var){
             return true;
         }else{
             return false;
@@ -101,7 +102,8 @@ class Model
         $subj=$_POST['subject'];
         $comment=$_POST['comment'];
         
-        $to='lotuselizza@gmail.com';
+//        $to='lotuselizza@gmail.com';
+        $to=EMAIL;
         $subject=$subj;
         $body="$name .$email . $subj . $comment";
             $headers  ="From:".$name."<".$email.">\r\n";
@@ -111,7 +113,7 @@ class Model
         //confirmation mail
             $user=$email;
             $usersubject = "Email to Admin";
-            $userheaders = "From: lotuselizza@gmail.com\n";
+            $userheaders = "From: ".EMAIL."\n";
             $usermessage = "Thank you for your letter! We will connect you ASAP!!!";
         //sending process
             $send=mail($to, $subject, $body, $headers);

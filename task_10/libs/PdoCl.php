@@ -10,9 +10,8 @@ protected $con;
         $this->con = Connection::getInstance();
     }
 
-    public function exec_select(){
+    public function execSelect(){
         $stm = $this->con->prepare($this->query);
-        var_dump($this->query);
         $stm->execute();
         $result = $stm->fetchAll(PDO::FETCH_ASSOC);
         $this->query = NULL;
@@ -24,9 +23,8 @@ protected $con;
         }
     }
 
-    public function exec_insert(){
+    public function execInsert(){
         $stm = $this->con->prepare($this->query);
-        var_dump($this->query);
         foreach ($this->values as $key => &$value){
             $stm->bindParam(':'.$key, $value, PDO::PARAM_STR);
         }
@@ -41,13 +39,12 @@ protected $con;
         }
     }
 
-    public function exec_update(){
+    public function execUpdate(){
         $stm = $this->con->prepare($this->query);
-        var_dump($this->query);
-        foreach ($this->upvalues as $key => &$value){
+        foreach ($this->upValues as $key => &$value){
             $stm->bindParam(':'.$key, $value, PDO::PARAM_STR);
         }
-        foreach ($this->where_v as $key => &$value){
+        foreach ($this->whereV as $key => &$value){
             $stm->bindParam(':'.$key, $value, PDO::PARAM_STR);
         }
         $stm->execute();
@@ -61,10 +58,9 @@ protected $con;
         }
     }
 
-    public function exec_delete(){
+    public function execDelete(){
         $stm = $this->con->prepare($this->query);
-        var_dump($this->query);
-        foreach ($this->where_v as $key => &$value){
+        foreach ($this->whereV as $key => &$value){
             $stm->bindParam(':'.$key, $value, PDO::PARAM_STR);
         }
         $stm->execute();
