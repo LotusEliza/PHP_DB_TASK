@@ -19,18 +19,18 @@
 //define('PG_NAME', 'user3');
 //define('PG_HOST', 'localhost');
 
-//------------CONNECT MySQL CLASS---------------
+////------------CONNECT MySQL CLASS---------------
 define('DB_USER', 'user3');
 define('DB_PASS', 'user3');
 define('DB_NAME', 'user3');
 define('DB_HOST', 'localhost');
-
-
-//------------CONNECT PG CLASS---------------
-define('PG_USER', 'user3');
-define('PG_PASS', '-Uuser3');
-define('PG_NAME', 'user3');
-define('PG_HOST', 'localhost');
+//
+//
+////------------CONNECT PG CLASS---------------
+//define('PG_USER', 'user3');
+//define('PG_PASS', 'user3');
+//define('PG_NAME', 'user3');
+//define('PG_HOST', 'localhost');
 
 //----------ERROR CONNECT DB--------------
 define("ERROR_MYSQL", "DB Error, could not query the database\n MySQL Error: ");

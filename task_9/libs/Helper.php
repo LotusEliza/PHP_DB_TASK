@@ -26,32 +26,31 @@ class Helper{
      }
 
 
-    static function checkBox($array)
+    static function checkBox($array, $name)
     {
         $result="";
         foreach ($array as $key => $item) {
-            $result .= "<input type = \"checkbox\" name = \"vehicle1\" value = \"" . $key . "\" >" . $item . "<br>";
+            $result .= "<input type = \"checkbox\" name = $name value = \"" . $key . "\" >" . $item . "<br>";
         }
         return $result;
     }
 
-    static function multiSelect($class, $array){
+    static function multiSelect($class, $array, $name){
 
         $result = "<form method=\"POST\" action=\"\">";
-        $result .= "<select name=\"flower[ ]\" multiple class=\" . $class  . \">";
+        $result .= "<select name=\"".$name."[ ]\" multiple class=\" . $class  . \">";
         foreach($array as $key=>$item){
             $result .= "<option value=\"" . $key . "\">" . $item . "</option>";
         }
         $result .= "</select> <br>";
-        $result .= "<input type=\"submit\" name=\"submit\" value=Submit>";
         $result .= "</form>";
         return $result;
     }
 
-    static function radioButton($class, $array){
+    static function radioButton($class, $array, $name){
         $result = "<form action=\"\" class='" . $class . "'>";
         foreach ($array as $key => $item) {
-            $result .= "<input type=\"radio\" name=\"gender\" value=\"" . $key . "\">" . $item . "<br>";
+            $result .= "<input type=\"radio\" name=$name value=\"" . $key . "\">" . $item . "<br>";
         }
         $result .= "</form>";
         return $result;
@@ -75,5 +74,4 @@ class Helper{
         $result .= "</dl>";
         return $result;
     }
-
 }

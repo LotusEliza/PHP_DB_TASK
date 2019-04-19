@@ -20,7 +20,8 @@ class Mysql implements iWorkData
 
     public function saveData($key, $val){
         $this->val = $val;
-        $query = "INSERT INTO try ($key) VALUES (\"$val\")";
+        $query = "INSERT INTO try ($key) VALUES ('$val')";
+        echo $query;
         $result = mysql_query($query, $this->link);
         mysql_free_result($result);
 

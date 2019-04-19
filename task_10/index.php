@@ -34,12 +34,12 @@ $objPdo->setWhereF('customerID');
 $objPdo->setWhereV(2);
 
 
-$resIns = $objPdo->f_insert()->execInsert();
-$resJoin = $objPdo->f_select2()->f_from()->f_join()->execSelect();
-$resHav = $objPdo->f_select()->f_from()->groupBy()->having()->execSelect();
-$resOrder = $objPdo->f_select()->f_from()->orderBy()->execSelect();
-$resUpd = $objPdo->f_update()->f_where()->execUpdate();
-$resDel = $objPdo->f_delete()->f_where()->execDelete();
+$resIns = $objPdo->insert()->execInsert();
+$resJoin = $objPdo->select2()->from()->join()->execSelect();
+$resHav = $objPdo->select()->from()->groupBy()->having()->execSelect();
+$resOrder = $objPdo->select()->from()->orderBy()->execSelect();
+$resUpd = $objPdo->update()->where()->execUpdate();
+$resDel = $objPdo->delete()->where()->execDelete();
 
 $tablJoin = Helper::createTable($resJoin);
 $tablHav = Helper::createTable($resHav);

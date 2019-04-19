@@ -25,7 +25,7 @@ class Postgresql extends SQL implements iData
         }else{
             $array_result=[];
             while ($row = pg_fetch_assoc($result)) {
-                $array_result[] = array('name'=>$row["name"], 'city'=>$row["city"], 'age'=>$row["age"]);
+                $array_result[] = $row;
             }
             return  $array_result;
         }

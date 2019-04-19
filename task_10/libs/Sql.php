@@ -81,13 +81,13 @@ class SQL
         array_push($this->whereV,"$value");
     }
 
-    public function f_select(){
+    public function select(){
            $fieldsStr = implode(", ", $this->fields);
            $this->query .= "SELECT $fieldsStr";
            return $this;
     }
 
-    public function f_select2(){
+    public function select2(){
 
             $array = $this->tablField($this->fields, $this->table);
             $array2 = $this->tablField($this->fields2, $this->table2);
@@ -98,7 +98,7 @@ class SQL
             return $this;
     }
 
-     public function f_join(){
+     public function join(){
          $fieldsStr = $this->table.".".$this->onField;
          $fieldsStr2 = $this->table2.".".$this->onField2;
          $inner ="inner";
@@ -134,12 +134,12 @@ class SQL
         return $array;
     }
 
-    public function f_from(){
+    public function from(){
         $this->query .= " FROM $this->table";
         return $this;
     }
 
-    public function f_where(){
+    public function where(){
         $array=[];
         $keys = $this->prepBind($this->whereV);
         foreach (array_combine($this->whereF, $keys) as $field => $value) {
@@ -165,7 +165,7 @@ class SQL
         return $this;
     }
 
-    public function f_update(){
+    public function update(){
         $update=[];
         $this->values;
         $keys = $this->prepBind($this->values);
@@ -177,7 +177,7 @@ class SQL
         return $this;
     }
 
-    public function f_insert(){
+    public function insert(){
         $fields_str = $this->implodeDot($this->fields);
         $keys = array_keys($this->values);
         foreach ($keys as &$value) {
@@ -189,7 +189,7 @@ class SQL
         return $this;
     }
 
-        public function prepBind($values){
+    public function prepBind($values){
         $keys = array_keys($values);
         foreach ($keys as &$value) {
             $value = ':'.$value;
@@ -197,7 +197,7 @@ class SQL
         return $keys;
     }
 
-    public function f_delete(){
+    public function delete(){
         $this->query .= "DELETE FROM $this->table";
         return $this;
     }

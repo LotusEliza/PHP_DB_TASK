@@ -77,6 +77,9 @@ xZcGrFwpfRq35yPU32dhspmOT10RfvugEedEqcL8Als5gTBQeHPJs0Z2D94LYADzNuNraF686iYKuCYl
 
 
 
+
+
+
 -----------------------------WITH indexes-------------------------------------
 SELECT id, name, description FROM task2 WHERE id=850000;
 

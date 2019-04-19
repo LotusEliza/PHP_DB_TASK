@@ -6,13 +6,8 @@
  * Time: 11:39 AM
  */
 
-<<<<<<< HEAD
-// define('DB_USER', 'phpmyadmin');
-// define('DB_PASS', '12122');
-// define('DB_NAME', 'test');
-// define('DB_HOST', 'localhost');
 
-=======
+
 ////------------CONNECT MySQL HOME---------------
 //define('DB_USER', 'phpmyadmin');
 //define('DB_PASS', '12122');
@@ -20,7 +15,6 @@
 //define('DB_HOST', 'localhost');
 //
 //------------CONNECT MySQL CLASS---------------
->>>>>>> c5caf91001dcb8547cf72b66740a7c1115e13fa5
 define('DB_USER', 'user3');
 define('DB_PASS', 'user3');
 define('DB_NAME', 'user3');
