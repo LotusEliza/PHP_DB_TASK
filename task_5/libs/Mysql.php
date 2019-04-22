@@ -21,9 +21,8 @@ class Mysql implements iWorkData
     public function saveData($key, $val){
         $this->val = $val;
         $query = "INSERT INTO try ($key) VALUES ('$val')";
-        echo $query;
         $result = mysql_query($query, $this->link);
-        mysql_free_result($result);
+
 
         if ($result === TRUE) {
             return ITEM_INS;
@@ -51,8 +50,6 @@ class Mysql implements iWorkData
     public function deleteData($key){
         $query = "DELETE FROM try WHERE $key='$this->val'";
         $result = mysql_query($query, $this->link);
-
-        mysql_free_result($result);
 
         if ($result === TRUE) {
             return ITEM_REM;
