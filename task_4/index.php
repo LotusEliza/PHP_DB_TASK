@@ -41,11 +41,6 @@ $my_select = select($objMysql);
 $my_update = update($objMysql);
 $my_delete = delete($objMysql);
 
-//$my_insert = $objMysql->f_insert();
-//$my_select = $objMysql->f_select();
-//$my_update = $objMysql->f_update();
-//$my_delete = $objMysql->f_delete();
-
 $objPostgr = new Postgresql();
 $objPostgr->set_table('user3');
 $objPostgr->set_limit("2");
@@ -66,11 +61,6 @@ $pg_insert = insert($objPostgr);
 $pg_select = select($objPostgr);
 $pg_update = update($objPostgr);
 $pg_delete = delete($objPostgr);
-
-//$pg_insert = $objPostgr->f_insert();
-//$pg_select = $objPostgr->f_select();
-//$pg_update = $objPostgr->f_update();
-//$pg_delete = $objPostgr->f_delete();
 
 
 include 'templates/index.php';

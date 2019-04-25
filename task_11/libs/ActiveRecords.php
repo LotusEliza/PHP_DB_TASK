@@ -8,12 +8,10 @@
 
 class ActiveRecords
 {
-
     private $id;
     private $title;
     private $price;
     private $description;
-
 
     public static function newEmptyInstance() {
         return new self();
@@ -68,7 +66,6 @@ class ActiveRecords
         }else{
             return ERROR_UPD;
         }
-        
     }
 
     private function _insert() {
@@ -99,8 +96,6 @@ class ActiveRecords
             return ERROR_REM;
         }
     }
-
-
 
     public static function find($aCount, $aOptFrom = null) {
         $lFrom = is_null($aOptFrom) ? '' : (int) $aOptFrom . ', ';
@@ -140,5 +135,4 @@ class ActiveRecords
             return false;
         }
     }
-
 }

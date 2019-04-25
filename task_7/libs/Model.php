@@ -35,14 +35,12 @@ class Model
 
      public function checkForm()
      {
-
         //----------------------------CHECK NAME------------------------------------
          if (empty($_POST["name"])) {
              $this->array['%ERROR_NAME%'] = NAME_REQ;
          } else {
              $name = $this->test_input($_POST["name"]);
-             if (!preg_match(PREG_NAME, $name)) {
-//                 $this->array['%ERROR_NAME%'] = "Only letters and white space allowed";
+             if (!preg_match("/^[a-zA-Z ]*$/", $name)) {
                  $this->array['%ERROR_NAME%'] = ERROR_NAME;
              } else {
                  $this->array['%NAME%'] = $name;
@@ -53,12 +51,9 @@ class Model
         //----------------------------CHECK EMAIL------------------------------------
          if (empty($_POST["email"])) {
             $this->array['%ERROR_EMAIL%']=EMAIL_REQ;
-//            $this->array['%ERROR_EMAIL%']="Email is required";
          }else {
             $email = $this->test_input($_POST["email"]);
-//            if (!preg_match("/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,})$/i",$email)) {
-            if (!preg_match(ERROR_EMAIL,$email)) {
-//                $this->array['%ERROR_EMAIL%'] = "Invalid email format";
+           if (!preg_match("/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,})$/i",$email)) {
                 $this->array['%ERROR_EMAIL%'] = ERROR_EMAIL;
             }else{
                 $this->array['%EMAIL%'] = $email;
@@ -68,7 +63,6 @@ class Model
 
          //----------------------------CHECK SUBJECT------------------------------------
          if (empty($_POST["subject"])) {
-//             $this->array['%ERROR_SUBJECT%']="Subject is required";
              $this->array['%ERROR_SUBJECT%']=ERROR_SUBJECT;
          }else{
              if($_POST["subject"]=="subject1"){
@@ -85,7 +79,6 @@ class Model
 
          //----------------------------CHECK COMMENT------------------------------------
         if (empty($_POST["comment"])) {
-//            $this->array['%ERROR_COMMENT%']="Comment is required";
             $this->array['%ERROR_COMMENT%']=ERROR_COMMENT;
         } else {
             $comment = $this->test_input($_POST["comment"]);
@@ -108,21 +101,18 @@ class Model
         $subj=$_POST['subject'];
         $comment=$_POST['comment'];
         
-//        $to='lotuselizza@gmail.com';
         $to=EMAIL;
         $subject=$subj;
         $body="$name .$email . $subj . $comment";
             $headers  ="From:".$name."<".$email.">\r\n";
             $headers .="reply-To:".$email."\r\n";
             $headers .=NINE;
-//            $headers .="Content-type: text/html; charset=utf-8";
             $headers .=CONT_TYPE;
 
         //confirmation mail
             $user=$email;
             $usersubject = TO_ADMIN;
             $userheaders = "From: ".EMAIL."\n";
-//            $usermessage = "Thank you for your letter! We will connect you ASAP!!!";
             $usermessage = THANK_YOU;
 
         //sending process
@@ -137,7 +127,6 @@ class Model
         }
 
         public function refresh(){
-
             //------------------REFRESH PAGE AFTER SENDING--------------------------
             $page = $_SERVER['PHP_SELF'];
             $sec = "2";

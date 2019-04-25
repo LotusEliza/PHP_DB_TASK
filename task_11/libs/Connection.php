@@ -23,8 +23,6 @@ class Connection {
         if (!self::$instance) {
             new Connection();
         }
-
         return self::$instance;
     }
-
 }

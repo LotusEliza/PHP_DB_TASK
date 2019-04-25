@@ -28,7 +28,6 @@
             <div class="col"><?=$multi;?></div>
         </div>
     </div>
-<?php //Helper::addFooter($text, $class); ?>
 
 </body>
 </html>

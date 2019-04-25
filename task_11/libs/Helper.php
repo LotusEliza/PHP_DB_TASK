@@ -25,7 +25,6 @@ class Helper{
         return $array;
      }
 
-
     static function checkBox($array)
     {
         $result="";

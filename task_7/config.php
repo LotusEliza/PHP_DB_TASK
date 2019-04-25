@@ -13,7 +13,4 @@ define('EMAIL_REQ',"Email is required");
 define('NAME_REQ',"Name is required");
 define('ERROR_SUBJECT',"Subject is required");
 define('ERROR_COMMENT',"Comment is required");
-define('PREG_EMAIL',"/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,})$/i");
-define('PREG_NAME',"/^[a-zA-Z ]*$/");
 define('SELECTED',"selected = \"selected\"");
-
