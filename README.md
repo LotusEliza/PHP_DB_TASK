@@ -21,3 +21,11 @@ Task10   SQL extended
 Task11   Active Record
 
 Task13   Unit tests
+
+_______________DB_______________
+
+Task1    Book Catalogue db scheme with cart  
+
+Task2    SQL DB Indexes (MySQL, PostgreSQL)
+
+Task3    SQL join 
